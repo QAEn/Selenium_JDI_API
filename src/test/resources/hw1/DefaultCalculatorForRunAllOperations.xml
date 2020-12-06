@@ -1,0 +1,17 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Default calculator for run all operations">
+
+    <test name="Calculator for sum and subtraction operations">
+        <classes>
+            <class name="hw1.operationCheckTest.SubtractionTest"/>
+            <class name="hw1.operationCheckTest.SumTest"/>
+        </classes>
+    </test>
+
+    <test name="Calculator for division and multiply operations">
+        <classes>
+            <class name="hw1.operationCheckTest.DivisionTest"/>
+            <class name="hw1.operationCheckTest.MultiplyTest"/>
+        </classes>
+    </test>
+</suite>
