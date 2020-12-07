@@ -14,18 +14,18 @@
 
     <profiles>
         <profile>
-            <id>DefaultCalculatorForRunAllOperations</id>
+            <id>CalculatorForRunAllOperations</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw1/DefaultCalculatorForRunAllOperations.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw1/CalculatorForRunAllOperations.xml</suite.file>
             </properties>
         </profile>
         <profile>
             <id>CalculatorForSumAndSubtractionOperations</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw1/CalculatorForSumAndSubtractionOperations.xml</suite.file>
