@@ -47,7 +47,7 @@ public class HomePage extends AbstractPage {
     public void login() {
         String loginCaret = getPageProperty("loginCaret");
         waitForElementLocatedBy(driver, By.xpath(loginCaret));
-        driver.findElement(By.xpath(loginCaret)).click();
+        driver.findElement(By.xpath(loginCaret)).click(); // <<<----- 1
 
         String username = getPageProperty("username");
         waitForElementLocatedBy(driver, By.cssSelector(username));

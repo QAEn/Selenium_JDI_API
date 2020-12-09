@@ -1,6 +1,7 @@
 package hw2.ex1.runTest;
 
 import hw2.ex1.pages.HomePage;
+import hw2.ex1.webDriver.DriverManager;
 import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -17,20 +18,13 @@ public class RunTest {
     //For the current exercise please use SoftAsserts!!! TODO
 
     private WebDriver driver;
-    private String driverPath = getConfigProperty("driverPath");
-    private String typeOfWebDriver = getConfigProperty("typeOfWebDriver");
+    private DriverManager driverManager;
     private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        System.setProperty(typeOfWebDriver, driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        //Какой из вариантов wait необходимо использовать в этой точке?
-        //Page load:
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        //Script:
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        driverManager = new DriverManager();
+        driver =  driverManager.setupDriver();
     }
 
     @Test(
