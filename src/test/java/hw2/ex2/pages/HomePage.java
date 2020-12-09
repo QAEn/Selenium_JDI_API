@@ -3,7 +3,9 @@ package hw2.ex2.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import java.io.FileInputStream;
@@ -80,8 +82,20 @@ public class HomePage extends AbstractPage {
      * DATA:
      * EXPECTED RESULT: Page is opened
      */
-    public void openDifferentElementsPage() {
+    public void openDifferentElements() {
+        //click Service header menu
+        {
+            String serviceHeaderElement = getPageProperty("serviceHeaderElement"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(serviceHeaderElement));
+            driver.findElement(By.xpath(serviceHeaderElement)).click();
+        }
 
+        //click Different Elements
+        {
+            String differentElements = getPageProperty("differentElements"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(differentElements));
+            driver.findElement(By.xpath(differentElements)).click();
+        }
     }
 
     /**
@@ -90,6 +104,18 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Elements are checked
      */
     public void selectCheckboxes() {
+        //select checkbox with parameter Water
+        {
+            String water = getPageProperty("water"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(water));
+            driver.findElement(By.xpath(water)).click();
+        }
+        //select checkbox with parameter Wind
+        {
+            String wind = getPageProperty("wind"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(wind));
+            driver.findElement(By.xpath(wind)).click();
+        }
     }
 
     /**
@@ -98,6 +124,9 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Element is checked
      */
     public void selectRadio() {
+        String selen = getPageProperty("selen"); //заменить xpath todo
+        waitForElementLocatedBy(driver, By.xpath(selen));
+        driver.findElement(By.xpath(selen)).click();
     }
 
     /**
@@ -106,6 +135,9 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Element is selected
      */
     public void selectInDropdown() {
+        String dropdown = getPageProperty("dropdown"); //заменить xpath todo
+        Select color = new Select(driver.findElement(By.xpath(dropdown)));
+        color.selectByVisibleText("Yellow");
     }
 
     /**
@@ -124,6 +156,35 @@ public class HomePage extends AbstractPage {
      *•	dropdown name and selected value is corresponding to selected
      */
     public void assertActions() {
+        //for each checkbox there is an individual log row and value is corresponded to the status of checkbox
+        {
+            //for Water
+            String assertCheckBoxWater = getPageProperty("assertCheckBoxWater"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(assertCheckBoxWater));
+            String actualWater = driver.findElement(By.xpath(assertCheckBoxWater)).getText();
+            Assert.assertTrue(actualWater.contains("Water") && actualWater.endsWith("true"));
+
+            //for Wind
+            String assertCheckBoxWind = getPageProperty("assertCheckBoxWind"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(assertCheckBoxWind));
+            String actualWind = driver.findElement(By.xpath(assertCheckBoxWind)).getText();
+            Assert.assertTrue(actualWind.contains("Wind") && actualWind.endsWith("true"));
+        }
+
+        //for radio button there is a log row and value is corresponded to the status of radio button
+        {
+            String assertRadioBtn = getPageProperty("assertRadioBtn"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(assertRadioBtn));
+            String actual = driver.findElement(By.xpath(assertRadioBtn)).getText();
+            Assert.assertTrue(actual.contains("metal") && actual.endsWith("Selen")); //В требованиях ожидается статус, а фактически явного слова true или какого-либо другого признака, указывающего на состояние в строке ответа нет
+        }
+        //for dropdown there is a log row and value is corresponded to the selected value
+        {
+            String assertDropdown = getPageProperty("assertDropdown"); //заменить xpath todo
+            waitForElementLocatedBy(driver, By.xpath(assertDropdown));
+            String actual = driver.findElement(By.xpath(assertDropdown)).getText();
+            Assert.assertTrue(actual.contains("Colors") && actual.endsWith("Yellow"));
+        }
     }
 
     private WebElement waitForElementLocatedBy(WebDriver driver, By by) {

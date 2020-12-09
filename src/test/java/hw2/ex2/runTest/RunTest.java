@@ -1,6 +1,6 @@
 package hw2.ex2.runTest;
 
-import hw2.ex1.pages.HomePage;
+import hw2.ex2.pages.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -34,27 +34,18 @@ public class RunTest {
     @Test(
             description = "Second exercise test, Jira binding cab be here"
     )
-    public void exercise_1_Test() throws InterruptedException {
+    public void exercise_2_Test() throws InterruptedException {
         homePage = new HomePage(driver);
 
-        homePage.openPage();            //STEP #1: Open test site by URL
-        homePage.checkTitle();          //STEP #2: Assert Browser title
-        homePage.login();               //STEP #3: Perform login
-        homePage.assertUserName();      //STEP #4: Assert User name in the left-top side of screen that user is loggined
-        //STEP #5: Open through the header menu Service -> Different Elements Page
-        //STEP #6: Select checkboxes
-        //STEP #7: Select radio
-        //STEP #8: Select in dropdown
-
-        /*
-        STEP #9: Assert that:
-        •	for each checkbox there is an individual log row and value is corresponded to the status of checkbox
-        •	for radio button there is a log row and value is corresponded to the status of radio button
-        •	for dropdown there is a log row and value is corresponded to the selected value.
-        */
-
-        Thread.sleep(1000);
-
+        homePage.openPage();                //STEP #1: Open test site by URL
+        homePage.checkTitle();              //STEP #2: Assert Browser title
+        homePage.login();                   //STEP #3: Perform login
+        homePage.assertUserName();          //STEP #4: Assert User name in the left-top side of screen that user is loggined
+        homePage.openDifferentElements();   //STEP #5: Open through the header menu Service -> Different Elements Page
+        homePage.selectCheckboxes();        //STEP #6: Select checkboxes
+        homePage.selectRadio();             //STEP #7: Select radio
+        homePage.selectInDropdown();        //STEP #8: Select in dropdown
+        homePage.assertActions();           //STEP #9: Assert that each element corresponds to itself with positive status
     }
 
     @AfterMethod(alwaysRun = true)
