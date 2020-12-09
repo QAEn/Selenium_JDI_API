@@ -5,11 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.training.center.qa.at</groupId>
-    <artifactId>epam-test-auto-winter-2020</artifactId>
+    <artifactId>epam-test-auto-winter-2020-Aleksei-Lysogora</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <testng.version>7.3.0</testng.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <profiles>
@@ -22,6 +23,7 @@
                 <suite.file>${project.basedir}/src/test/resources/hw1/CalculatorForRunAllOperations.xml</suite.file>
             </properties>
         </profile>
+
         <profile>
             <id>CalculatorForSumAndSubtractionOperations</id>
             <activation>
@@ -31,6 +33,7 @@
                 <suite.file>${project.basedir}/src/test/resources/hw1/CalculatorForSumAndSubtractionOperations.xml</suite.file>
             </properties>
         </profile>
+
         <profile>
             <id>CalculatorForDivisionAndMultiplyOperations</id>
             <activation>
@@ -40,6 +43,17 @@
                 <suite.file>${project.basedir}/src/test/resources/hw1/CalculatorForDivisionAndMultiplyOperations.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>hw2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw2/suite/SuiteHW2.xml</suite.file>
+            </properties>
+        </profile>
+
     </profiles>
 
     <dependencies>
@@ -56,6 +70,13 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/src/main/resources/calculator-1.0.jar</systemPath>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
+
     </dependencies>
 
     <build>
