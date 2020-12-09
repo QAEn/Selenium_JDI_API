@@ -52,6 +52,7 @@ public class RunTest {
         homePage.assertLeftSectionItems(); //STEP #11: Assert that there are 5 items in the Left Section are displayed and they have proper text
 
         Thread.sleep(1000);
+
     }
 
     @AfterMethod(alwaysRun = true)

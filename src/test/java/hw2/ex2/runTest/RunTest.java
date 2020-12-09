@@ -54,6 +54,7 @@ public class RunTest {
         */
 
         Thread.sleep(1000);
+
     }
 
     @AfterMethod(alwaysRun = true)
