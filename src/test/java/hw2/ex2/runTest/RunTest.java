@@ -1,5 +1,6 @@
 package hw2.ex2.runTest;
 
+import hw2.ex2.pages.DifferentElementsPage;
 import hw2.ex2.pages.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,7 @@ public class RunTest {
     private String driverPath = getConfigProperty("driverPath");
     private String typeOfWebDriver = getConfigProperty("typeOfWebDriver");
     private HomePage homePage;
+    private DifferentElementsPage differentElementsPage;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
@@ -36,16 +38,18 @@ public class RunTest {
     )
     public void exercise_2_Test() {
         homePage = new HomePage(driver);
+        differentElementsPage = new DifferentElementsPage(driver);
 
-        homePage.openPage();                //STEP #1: Open test site by URL
-        homePage.checkTitle();              //STEP #2: Assert Browser title
-        homePage.login();                   //STEP #3: Perform login
-        homePage.assertUserName();          //STEP #4: Assert User name in the left-top side of screen that user is loggined
-        homePage.openDifferentElements();   //STEP #5: Open through the header menu Service -> Different Elements Page
-        homePage.selectCheckboxes();        //STEP #6: Select checkboxes
-        homePage.selectRadio();             //STEP #7: Select radio
-        homePage.selectInDropdown();        //STEP #8: Select in dropdown
-        homePage.assertActions();           //STEP #9: Assert that each element corresponds to itself with positive status
+        homePage.openPage();                        //STEP #1: Open test site by URL
+        homePage.checkTitle();                      //STEP #2: Assert Browser title
+        homePage.login();                           //STEP #3: Perform login
+        homePage.assertUserName();                  //STEP #4: Assert User name in the left-top side of screen that user is loggined
+        differentElementsPage.openPage();           //STEP #5: Open through the header menu Service -> Different Elements Page
+        differentElementsPage.checkTitle();
+        differentElementsPage.selectCheckboxes();   //STEP #6: Select checkboxes
+        differentElementsPage.selectRadio();        //STEP #7: Select radio
+        differentElementsPage.selectInDropdown();   //STEP #8: Select in dropdown
+        differentElementsPage.assertActions();      //STEP #9: Assert that each element corresponds to itself with positive status
     }
 
     @AfterMethod(alwaysRun = true)

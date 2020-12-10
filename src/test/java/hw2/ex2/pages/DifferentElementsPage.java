@@ -2,77 +2,13 @@ package hw2.ex2.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 
-public class HomePage extends AbstractPage {
+public class DifferentElementsPage extends AbstractPage {
 
-    public HomePage(WebDriver driver) {
+    public DifferentElementsPage(WebDriver driver) {
         this.driver = driver;
-    }
-
-    /**
-     * STEP #1: Open test site by URL
-     * DATA: https://jdi-testing.github.io/jdi-light/index.html
-     * EXPECTED RESULT: Test site is opened
-     */
-    @Override
-    public void openPage() {
-        driver.get(getPageProperty("homePageURL"));
-    }
-
-    /**
-     * STEP #2: Assert Browser title
-     * DATA: "Home Page"
-     * EXPECTED RESULT: Browser title equals "Home Page"
-     */
-    @Override
-    public void checkTitle() {
-        Assert.assertTrue(driver.getTitle().equals("Home Page") ? true : false);
-    }
-
-    /**
-     * STEP #3: Perform login
-     * DATA: username: Roman, pass: Jdi1234
-     * EXPECTED RESULT: User is logged
-     */
-    public void login() {
-        String loginCaret = getPageProperty("loginCaret");
-        waitForElementLocatedBy(driver, By.xpath(loginCaret));
-        driver.findElement(By.xpath(loginCaret)).click();
-
-        String username = getPageProperty("username");
-        waitForElementLocatedBy(driver, By.cssSelector(username));
-        driver.findElement(By.cssSelector(username)).sendKeys("Roman");
-
-        String pass = getPageProperty("pass");
-        waitForElementLocatedBy(driver, By.cssSelector(pass));
-        driver.findElement(By.cssSelector(pass)).sendKeys("Jdi1234");
-
-        String enterBtn = getPageProperty("enterBtn");
-        waitForElementLocatedBy(driver, By.xpath(enterBtn));
-        driver.findElement(By.xpath(enterBtn)).click();
-    }
-
-    /**
-     * STEP #4: Assert User name that user is logged
-     * DATA: "ROMAN IOVLEV"
-     * EXPECTED RESULT: Name is displayed and equals to expected result
-     */
-    public void assertUserName() {
-        String assertUserName = getPageProperty("assertUserName");
-        waitForElementLocatedBy(driver, By.cssSelector(assertUserName));
-        String actual = driver.findElement(By.cssSelector(assertUserName)).getText();
-        String expected = "ROMAN IOVLEV";
-        Assert.assertEquals(actual, expected);
     }
 
     /**
@@ -80,7 +16,8 @@ public class HomePage extends AbstractPage {
      * DATA:
      * EXPECTED RESULT: Page is opened
      */
-    public void openDifferentElements() {
+    @Override
+    public void openPage() {
         //click Service header menu
         {
             String serviceHeaderElement = getPageProperty("serviceHeaderElement"); //заменить xpath todo
@@ -95,6 +32,12 @@ public class HomePage extends AbstractPage {
             driver.findElement(By.xpath(differentElements)).click();
         }
     }
+
+    @Override
+    public void checkTitle() {
+        Assert.assertTrue(driver.getTitle().equals("Different Elements") ? true : false);
+    }
+
 
     /**
      * STEP #6: Select checkboxes
