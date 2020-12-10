@@ -34,7 +34,7 @@ public class RunTest {
     @Test(
             description = "Second exercise test, Jira binding cab be here"
     )
-    public void exercise_2_Test() throws InterruptedException {
+    public void exercise_2_Test() {
         homePage = new HomePage(driver);
 
         homePage.openPage();                //STEP #1: Open test site by URL

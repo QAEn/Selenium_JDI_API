@@ -45,9 +45,9 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: User is logged
      */
     public void login() {
-        String loginCaret = getPageProperty("loginCaret");
+        String loginCaret = getPageProperty("loginCaret"); //xpath todo
         waitForElementLocatedBy(driver, By.xpath(loginCaret));
-        driver.findElement(By.xpath(loginCaret)).click(); // <<<----- 1
+        driver.findElement(By.xpath(loginCaret)).click();
 
         String username = getPageProperty("username");
         waitForElementLocatedBy(driver, By.cssSelector(username));
@@ -68,9 +68,9 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Name is displayed and equals to expected result
      */
     public void assertUserName() {
-        String userName = getPageProperty("userName");
-        waitForElementLocatedBy(driver, By.cssSelector(userName));
-        String actual = driver.findElement(By.cssSelector(userName)).getText();
+        String assertUserName = getPageProperty("assertUserName");
+        waitForElementLocatedBy(driver, By.cssSelector(assertUserName));
+        String actual = driver.findElement(By.cssSelector(assertUserName)).getText();
         String expected = "ROMAN IOVLEV";
         Assert.assertEquals(actual, expected);
     }
@@ -140,6 +140,11 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: The iframe exists
      */
     public void iframeWithButtonExists() {
+        String iframe = getPageProperty("iframe");
+        waitForElementLocatedBy(driver, By.xpath(iframe));
+        String actual = driver.findElement(By.xpath(iframe)).getText();
+        String expected = "<p>Your browser does not support iframes.</p>";
+        Assert.assertEquals(actual, expected);
     }
 
     /**
@@ -147,7 +152,16 @@ public class HomePage extends AbstractPage {
      * DATA: -
      * EXPECTED RESULT: The “Frame Button” exists
      */
+
     public void frameButtonExists() {
+        String iframe = getPageProperty("iframe");
+        waitForElementLocatedBy(driver, By.xpath(iframe));
+        //String windowHandler = driver.getWindowHandle();
+        driver.switchTo().frame(0);
+        String iframeBtn = getPageProperty("iframeBtn");
+        String actual = driver.findElement(By.xpath(iframeBtn)).getAttribute("value");
+        String expected = "Frame Button";
+        Assert.assertEquals(actual, expected);
     }
 
     /**
@@ -156,6 +170,7 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Driver has focus on the original window
      */
     public void switchHomePage() {
+        driver.switchTo().defaultContent();
     }
 
     /**

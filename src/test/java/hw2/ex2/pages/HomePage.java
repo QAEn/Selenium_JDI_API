@@ -65,14 +65,14 @@ public class HomePage extends AbstractPage {
     }
 
     /**
-     * STEP #4: Assert User name in the left-top side of screen that user is loggined
+     * STEP #4: Assert User name that user is logged
      * DATA: "ROMAN IOVLEV"
      * EXPECTED RESULT: Name is displayed and equals to expected result
      */
     public void assertUserName() {
-        String userName = getPageProperty("userName");
-        waitForElementLocatedBy(driver, By.cssSelector(userName));
-        String actual = driver.findElement(By.cssSelector(userName)).getText();
+        String assertUserName = getPageProperty("assertUserName");
+        waitForElementLocatedBy(driver, By.cssSelector(assertUserName));
+        String actual = driver.findElement(By.cssSelector(assertUserName)).getText();
         String expected = "ROMAN IOVLEV";
         Assert.assertEquals(actual, expected);
     }
@@ -197,9 +197,9 @@ public class HomePage extends AbstractPage {
         {
             property.load(fis);
         } catch (FileNotFoundException e) {
-            System.out.println("File with resources of page was not founded");
+            System.out.println("File with resources of page was not founded (exercise 2)");
         } catch (IOException e) {
-            System.out.println("IOException for page");
+            System.out.println("IOException for page (exercise 2)");
         }
         return property.getProperty(nameOfProperty);
     }
