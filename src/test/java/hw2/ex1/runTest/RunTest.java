@@ -32,8 +32,8 @@ public class RunTest {
         homePage.login();                   //STEP #3: Perform login
         homePage.assertUserName();          //STEP #4: Assert Username is logged
         homePage.assertHeaderItems();       //STEP #5: Assert that there are 4 items on the header section are displayed and they have proper texts
-        //homePage.assertImages();            //STEP #6: Assert that there are 4 images on the Index Page and they are displayed
-        //homePage.assertText();              //STEP #7: Assert that there are 4 texts on the Index Page under icons and they have proper text
+        homePage.assertImages();            //STEP #6: Assert that there are 4 images on the Index Page and they are displayed
+        homePage.assertText();              //STEP #7: Assert that there are 4 texts on the Index Page under icons and they have proper text
         homePage.iframeWithButtonExists();  //STEP #8: Assert that there is the iframe with “Frame Button” exist
         homePage.frameButtonExists();       //STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
         homePage.switchHomePage();          //STEP #10: Switch to original window back

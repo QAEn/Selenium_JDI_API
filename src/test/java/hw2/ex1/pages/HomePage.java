@@ -124,6 +124,33 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Images are displayed
      */
     public void assertImages() {
+        //microscopeImg
+        {
+            String microscopeImg = getPageProperty("microscopeImg");
+            waitForElementLocatedBy(driver, By.xpath(microscopeImg));
+            Assert.assertTrue(driver.findElement(By.xpath(microscopeImg)).isDisplayed());
+        }
+
+        //headphonesImg
+        {
+            String headphonesImg = getPageProperty("headphonesImg");
+            waitForElementLocatedBy(driver, By.xpath(headphonesImg));
+            Assert.assertTrue(driver.findElement(By.xpath(headphonesImg)).isDisplayed());
+        }
+
+        //monitorImg
+        {
+            String monitorImg = getPageProperty("monitorImg");
+            waitForElementLocatedBy(driver, By.xpath(monitorImg));
+            Assert.assertTrue(driver.findElement(By.xpath(monitorImg)).isDisplayed());
+        }
+
+        //rocketImg
+        {
+            String rocketImg = getPageProperty("rocketImg");
+            waitForElementLocatedBy(driver, By.xpath(rocketImg));
+            Assert.assertTrue(driver.findElement(By.xpath(rocketImg)).isDisplayed());
+        }
     }
 
     /**
@@ -132,6 +159,41 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Texts are displayed and equal to expected
      */
     public void assertText() {
+        //microscopeTxt
+        {
+            String microscopeTxt = getPageProperty("microscopeTxt");
+            waitForElementLocatedBy(driver, By.xpath(microscopeTxt));
+            String actual = driver.findElement(By.xpath(microscopeTxt)).getText();
+            String expected = "To include good practices\n" + "and ideas from successful\n" + "EPAM project";
+            Assert.assertEquals(actual, expected);
+        }
+
+        //headphonesTxt
+        {
+            String headphonesTxt = getPageProperty("headphonesTxt");
+            waitForElementLocatedBy(driver, By.xpath(headphonesTxt));
+            String actual = driver.findElement(By.xpath(headphonesTxt)).getText();
+            String expected = "To be flexible and\n" + "customizable";
+            Assert.assertEquals(actual, expected);
+        }
+
+        //monitorTxt
+        {
+            String monitorTxt = getPageProperty("monitorTxt");
+            waitForElementLocatedBy(driver, By.xpath(monitorTxt));
+            String actual = driver.findElement(By.xpath(monitorTxt)).getText();
+            String expected = "To be multiplatform";
+            Assert.assertEquals(actual, expected);
+        }
+
+        //rocketTxt
+        {
+            String rocketTxt = getPageProperty("rocketTxt");
+            waitForElementLocatedBy(driver, By.xpath(rocketTxt));
+            String actual = driver.findElement(By.xpath(rocketTxt)).getText();
+            String expected = "Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n" + "wish to get more…";
+            Assert.assertEquals(actual, expected);
+        }
     }
 
     /**
