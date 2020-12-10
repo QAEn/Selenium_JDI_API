@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Calculator for division and multiply operations">
+
+    <test name="Calculator for division and multiply operations">
+        <classes>
+            <class name="hw1.operationCheckTest.DivisionTest"/>
+            <class name="hw1.operationCheckTest.MultiplyTest"/>
+        </classes>
+    </test>
+</suite>
