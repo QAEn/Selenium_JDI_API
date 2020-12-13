@@ -11,6 +11,8 @@
     <properties>
         <testng.version>7.3.0</testng.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <selenium.version>3.141.59</selenium.version>
+        <webdrivermanager.version>4.2.2</webdrivermanager.version>
     </properties>
 
     <profiles>
@@ -47,7 +49,8 @@
         <profile>
             <id>hw2</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+<!--                activeByDefault is false by default, so this line can be omitted-->
+<!--                <activeByDefault>false</activeByDefault>-->
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw2/suite/SuiteHW2.xml</suite.file>
@@ -73,12 +76,12 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>4.2.2</version>
+            <version>${webdrivermanager.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -86,6 +89,31 @@
 
     <build>
         <plugins>
+
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--                <version>3.1.1</version>-->
+<!--                <configuration>-->
+<!--                    <configLocation>-->
+<!--                        https://raw.githubusercontent.com/shoggy/epam-ru-pet-ta-2020-notes/master/checkstyle_config.xml-->
+<!--                    </configLocation>-->
+<!--                    <encoding>UTF-8</encoding>-->
+<!--                    <consoleOutput>true</consoleOutput>-->
+<!--                    <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+<!--                    <violationSeverity>warning</violationSeverity>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>validate</id>-->
+<!--                        <phase>validate</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>check</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+
             <plugin> <!--Плагин для исправления версии Java-->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -96,6 +124,7 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -106,6 +135,7 @@
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 </project>

@@ -35,7 +35,7 @@ public class DifferentElementsPage extends AbstractPage {
 
     @Override
     public void checkTitle() {
-        Assert.assertTrue(driver.getTitle().equals("Different Elements") ? true : false);
+        Assert.assertEquals(driver.getTitle(), "Different Elements");
     }
 
 

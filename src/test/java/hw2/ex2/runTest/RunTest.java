@@ -1,36 +1,39 @@
 package hw2.ex2.runTest;
 
+import hw2.baseClass.DriverManager;
 import hw2.ex2.pages.DifferentElementsPage;
 import hw2.ex2.pages.HomePage;
 import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 public class RunTest {
 
     private WebDriver driver;
-    private String driverPath = getConfigProperty("driverPath");
-    private String typeOfWebDriver = getConfigProperty("typeOfWebDriver");
     private HomePage homePage;
     private DifferentElementsPage differentElementsPage;
 
+//    private String driverPath = getConfigProperty("driverPath");
+//    private String typeOfWebDriver = getConfigProperty("typeOfWebDriver");
+
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        System.setProperty(typeOfWebDriver, driverPath);
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        //Какой из вариантов wait необходимо использовать в этой точке?
-        //Page load:
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        //Script:
-        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+//        Позвольте оставить этот код, для будущих примеров)
+//        options = new ChromeOptions();
+//        options.addArguments("start-maximized");
+//        System.setProperty(typeOfWebDriver, driverPath);
+//        driver = new ChromeDriver(options);
+//        //Какой из вариантов wait необходимо использовать в этой точке?
+//        //Page load:
+//        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+//        //Script:
+//        driver.manage().timeouts().setScriptTimeout(10, TimeUnit.SECONDS);
+        driver =  new DriverManager().setupDriver();
     }
 
     @Test(

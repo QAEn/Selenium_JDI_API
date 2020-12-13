@@ -11,8 +11,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 public abstract class AbstractPage {
+
+    public WebDriver driver;
+
     public abstract void openPage();
-    public abstract boolean checkTitle();
+    public abstract void checkTitle();
 
     public WebElement waitForElementLocatedBy(WebDriver driver, By by) {
         return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(by));
@@ -25,9 +28,9 @@ public abstract class AbstractPage {
         {
             property.load(fis);
         } catch (FileNotFoundException e) {
-            System.out.println("File with resources of page was not founded (exercise 2)");
+            System.out.println("File with resources of page was not founded (exercise 1)");
         } catch (IOException e) {
-            System.out.println("IOException for page (exercise 2)");
+            System.out.println("IOException for page (exercise 1)");
         }
         return property.getProperty(nameOfProperty);
     }

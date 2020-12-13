@@ -1,7 +1,7 @@
 package hw2.ex1.runTest;
 
+import hw2.baseClass.DriverManager;
 import hw2.ex1.pages.HomePage;
-import hw2.ex1.webDriver.DriverManager;
 import org.testng.annotations.AfterMethod;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
@@ -9,16 +9,12 @@ import org.testng.annotations.Test;
 
 public class RunTest {
 
-    //For the current exercise please use SoftAsserts!!! TODO
-
     private WebDriver driver;
-    private DriverManager driverManager;
     private HomePage homePage;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
-        driverManager = new DriverManager();
-        driver =  driverManager.setupDriver();
+        driver =  new DriverManager().setupDriver();
     }
 
     @Test(
@@ -37,6 +33,7 @@ public class RunTest {
         homePage.iframeWithButtonExists();  //STEP #8: Assert that there is the iframe with “Frame Button” exist
         homePage.frameButtonExists();       //STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
         homePage.switchHomePage();          //STEP #10: Switch to original window back
+        homePage.checkTitle();
         homePage.assertLeftSectionItems();  //STEP #11: Assert that there are 5 items in the Left Section are displayed and they have proper text
     }
 
@@ -44,6 +41,5 @@ public class RunTest {
     public void browserTearDown() {
         driver.quit(); //STEP #12: Close Browser
         driver = null;
-        driverManager = null;
     }
 }

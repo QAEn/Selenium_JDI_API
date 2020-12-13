@@ -2,18 +2,9 @@ package hw2.ex1.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Properties;
 
 public class HomePage extends AbstractPage {
-
-    private WebDriver driver;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -35,8 +26,8 @@ public class HomePage extends AbstractPage {
      * EXPECTED RESULT: Browser title equals "Home Page"
      */
     @Override
-    public boolean checkTitle() {
-        return driver.getTitle().equals("Home Page") ? true : false;
+    public void checkTitle() {
+        Assert.assertEquals(driver.getTitle(), "Home Page");
     }
 
     /**
@@ -46,20 +37,16 @@ public class HomePage extends AbstractPage {
      */
     public void login() {
         String loginCaret = getPageProperty("loginCaret"); //xpath todo
-        waitForElementLocatedBy(driver, By.xpath(loginCaret));
-        driver.findElement(By.xpath(loginCaret)).click();
+        waitForElementLocatedBy(driver, By.xpath(loginCaret)).click();
 
         String username = getPageProperty("username");
-        waitForElementLocatedBy(driver, By.cssSelector(username));
-        driver.findElement(By.cssSelector(username)).sendKeys("Roman");
+        waitForElementLocatedBy(driver, By.cssSelector(username)).sendKeys("Roman");
 
         String pass = getPageProperty("pass");
-        waitForElementLocatedBy(driver, By.cssSelector(pass));
-        driver.findElement(By.cssSelector(pass)).sendKeys("Jdi1234");
+        waitForElementLocatedBy(driver, By.cssSelector(pass)).sendKeys("Jdi1234");
 
         String enterBtn = getPageProperty("enterBtn");
-        waitForElementLocatedBy(driver, By.xpath(enterBtn));
-        driver.findElement(By.xpath(enterBtn)).click();
+        waitForElementLocatedBy(driver, By.xpath(enterBtn)).click();
     }
 
     /**
@@ -69,8 +56,7 @@ public class HomePage extends AbstractPage {
      */
     public void assertUserName() {
         String assertUserName = getPageProperty("assertUserName");
-        waitForElementLocatedBy(driver, By.cssSelector(assertUserName));
-        String actual = driver.findElement(By.cssSelector(assertUserName)).getText();
+        String actual = waitForElementLocatedBy(driver, By.cssSelector(assertUserName)).getText();
         String expected = "ROMAN IOVLEV";
         Assert.assertEquals(actual, expected);
     }
@@ -82,40 +68,20 @@ public class HomePage extends AbstractPage {
      */
     public void assertHeaderItems() {
         //assert "HOME"
-        {
-            String home = getPageProperty("homeItem");
-            waitForElementLocatedBy(driver, By.xpath(home));
-            String actual = driver.findElement(By.xpath(home)).getText();
-            String expected = "HOME";
-            Assert.assertEquals(actual, expected);
-        }
+        String home = getPageProperty("homeItem");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(home)).getText(), "HOME");
 
         //assert "CONTACT FORM"
-        {
-            String contactForm = getPageProperty("contactForm");
-            waitForElementLocatedBy(driver, By.xpath(contactForm));
-            String actual = driver.findElement(By.xpath(contactForm)).getText();
-            String expected = "CONTACT FORM";
-            Assert.assertEquals(actual, expected);
-        }
+        String contactForm = getPageProperty("contactForm");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(contactForm)).getText(), "CONTACT FORM");
 
         //assert "SERVICE"
-        {
-            String service = getPageProperty("service");
-            waitForElementLocatedBy(driver, By.xpath(service));
-            String actual = driver.findElement(By.xpath(service)).getText();
-            String expected = "SERVICE";
-            Assert.assertEquals(actual, expected);
-        }
+        String service = getPageProperty("service");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(service)).getText(), "SERVICE");
 
         //"METALS & COLORS"
-        {
-            String metalColors = getPageProperty("metalColors");
-            waitForElementLocatedBy(driver, By.xpath(metalColors));
-            String actual = driver.findElement(By.xpath(metalColors)).getText();
-            String expected = "METALS & COLORS";
-            Assert.assertEquals(actual, expected);
-        }
+        String metalColors = getPageProperty("metalColors");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(metalColors)).getText(), "METALS & COLORS");
     }
 
     /**
@@ -125,32 +91,20 @@ public class HomePage extends AbstractPage {
      */
     public void assertImages() {
         //microscopeImg
-        {
-            String microscopeImg = getPageProperty("microscopeImg");
-            waitForElementLocatedBy(driver, By.xpath(microscopeImg));
-            Assert.assertTrue(driver.findElement(By.xpath(microscopeImg)).isDisplayed());
-        }
+        String microscopeImg = getPageProperty("microscopeImg");
+        Assert.assertTrue(waitForElementLocatedBy(driver, By.xpath(microscopeImg)).isDisplayed());
 
         //headphonesImg
-        {
-            String headphonesImg = getPageProperty("headphonesImg");
-            waitForElementLocatedBy(driver, By.xpath(headphonesImg));
-            Assert.assertTrue(driver.findElement(By.xpath(headphonesImg)).isDisplayed());
-        }
+        String headphonesImg = getPageProperty("headphonesImg");
+        Assert.assertTrue(waitForElementLocatedBy(driver, By.xpath(headphonesImg)).isDisplayed());
 
         //monitorImg
-        {
-            String monitorImg = getPageProperty("monitorImg");
-            waitForElementLocatedBy(driver, By.xpath(monitorImg));
-            Assert.assertTrue(driver.findElement(By.xpath(monitorImg)).isDisplayed());
-        }
+        String monitorImg = getPageProperty("monitorImg");
+        Assert.assertTrue(waitForElementLocatedBy(driver, By.xpath(monitorImg)).isDisplayed());
 
         //rocketImg
-        {
-            String rocketImg = getPageProperty("rocketImg");
-            waitForElementLocatedBy(driver, By.xpath(rocketImg));
-            Assert.assertTrue(driver.findElement(By.xpath(rocketImg)).isDisplayed());
-        }
+        String rocketImg = getPageProperty("rocketImg");;
+        Assert.assertTrue(waitForElementLocatedBy(driver, By.xpath(rocketImg)).isDisplayed());
     }
 
     /**
@@ -160,40 +114,24 @@ public class HomePage extends AbstractPage {
      */
     public void assertText() {
         //microscopeTxt
-        {
-            String microscopeTxt = getPageProperty("microscopeTxt");
-            waitForElementLocatedBy(driver, By.xpath(microscopeTxt));
-            String actual = driver.findElement(By.xpath(microscopeTxt)).getText();
-            String expected = "To include good practices\n" + "and ideas from successful\n" + "EPAM project";
-            Assert.assertEquals(actual, expected);
-        }
+        String microscopeTxt = getPageProperty("microscopeTxt");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(microscopeTxt)).getText(),
+                            "To include good practices\n" + "and ideas from successful\n" + "EPAM project");
 
         //headphonesTxt
-        {
-            String headphonesTxt = getPageProperty("headphonesTxt");
-            waitForElementLocatedBy(driver, By.xpath(headphonesTxt));
-            String actual = driver.findElement(By.xpath(headphonesTxt)).getText();
-            String expected = "To be flexible and\n" + "customizable";
-            Assert.assertEquals(actual, expected);
-        }
+        String headphonesTxt = getPageProperty("headphonesTxt");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(headphonesTxt)).getText(),
+                            "To be flexible and\n" + "customizable");
 
         //monitorTxt
-        {
-            String monitorTxt = getPageProperty("monitorTxt");
-            waitForElementLocatedBy(driver, By.xpath(monitorTxt));
-            String actual = driver.findElement(By.xpath(monitorTxt)).getText();
-            String expected = "To be multiplatform";
-            Assert.assertEquals(actual, expected);
-        }
+        String monitorTxt = getPageProperty("monitorTxt");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(monitorTxt)).getText(),
+                            "To be multiplatform");
 
         //rocketTxt
-        {
-            String rocketTxt = getPageProperty("rocketTxt");
-            waitForElementLocatedBy(driver, By.xpath(rocketTxt));
-            String actual = driver.findElement(By.xpath(rocketTxt)).getText();
-            String expected = "Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n" + "wish to get more…";
-            Assert.assertEquals(actual, expected);
-        }
+        String rocketTxt = getPageProperty("rocketTxt");
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(rocketTxt)).getText(),
+                "Already have good base\n" + "(about 20 internal and\n" + "some external projects),\n" + "wish to get more…");
     }
 
     /**
@@ -203,10 +141,8 @@ public class HomePage extends AbstractPage {
      */
     public void iframeWithButtonExists() {
         String iframe = getPageProperty("iframe");
-        waitForElementLocatedBy(driver, By.xpath(iframe));
-        String actual = driver.findElement(By.xpath(iframe)).getText();
-        String expected = "<p>Your browser does not support iframes.</p>";
-        Assert.assertEquals(actual, expected);
+        Assert.assertEquals(waitForElementLocatedBy(driver, By.xpath(iframe)).getText(),
+                "<p>Your browser does not support iframes.</p>");
     }
 
     /**
@@ -217,11 +153,9 @@ public class HomePage extends AbstractPage {
 
     public void frameButtonExists() {
         String iframe = getPageProperty("iframe");
-        waitForElementLocatedBy(driver, By.xpath(iframe));
-        //String windowHandler = driver.getWindowHandle();
-        driver.switchTo().frame(0);
+        driver.switchTo().frame(waitForElementLocatedBy(driver, By.xpath(iframe)));
         String iframeBtn = getPageProperty("iframeBtn");
-        String actual = driver.findElement(By.xpath(iframeBtn)).getAttribute("value");
+        String actual = waitForElementLocatedBy(driver, By.xpath(iframeBtn)).getAttribute("value");
         String expected = "Frame Button";
         Assert.assertEquals(actual, expected);
     }
@@ -244,8 +178,7 @@ public class HomePage extends AbstractPage {
         //assert "Home"
         {
             String homeLeftSide = getPageProperty("homeLeftSide");
-            waitForElementLocatedBy(driver, By.xpath(homeLeftSide));
-            String actual = driver.findElement(By.xpath(homeLeftSide)).getText();
+            String actual = waitForElementLocatedBy(driver, By.xpath(homeLeftSide)).getText();
             String expected = "Home";
             Assert.assertEquals(actual, expected);
         }
@@ -253,8 +186,7 @@ public class HomePage extends AbstractPage {
         //assert "Contact form"
         {
             String contactFormLeftSide = getPageProperty("contactFormLeftSide");
-            waitForElementLocatedBy(driver, By.xpath(contactFormLeftSide));
-            String actual = driver.findElement(By.xpath(contactFormLeftSide)).getText();
+            String actual = waitForElementLocatedBy(driver, By.xpath(contactFormLeftSide)).getText();
             String expected = "Contact form";
             Assert.assertEquals(actual, expected);
         }
@@ -262,8 +194,7 @@ public class HomePage extends AbstractPage {
         //assert "Service"
         {
             String serviceLeftSide = getPageProperty("serviceLeftSide");
-            waitForElementLocatedBy(driver, By.xpath(serviceLeftSide));
-            String actual = driver.findElement(By.xpath(serviceLeftSide)).getText();
+            String actual = waitForElementLocatedBy(driver, By.xpath(serviceLeftSide)).getText();
             String expected = "Service";
             Assert.assertEquals(actual, expected);
         }
@@ -271,8 +202,7 @@ public class HomePage extends AbstractPage {
         //"Metals & Colors"
         {
             String metalColorsLeftSide = getPageProperty("metalColorsLeftSide");
-            waitForElementLocatedBy(driver, By.xpath(metalColorsLeftSide));
-            String actual = driver.findElement(By.xpath(metalColorsLeftSide)).getText();
+            String actual = waitForElementLocatedBy(driver, By.xpath(metalColorsLeftSide)).getText();
             String expected = "Metals & Colors";
             Assert.assertEquals(actual, expected);
         }
@@ -280,8 +210,7 @@ public class HomePage extends AbstractPage {
         // assert "Elements packs"
         {
             String elementsPacksLeftSide = getPageProperty("elementsPacksLeftSide");
-            waitForElementLocatedBy(driver, By.xpath(elementsPacksLeftSide));
-            String actual = driver.findElement(By.xpath(elementsPacksLeftSide)).getText();
+            String actual = waitForElementLocatedBy(driver, By.xpath(elementsPacksLeftSide)).getText();
             String expected = "Elements packs";
             Assert.assertEquals(actual, expected);
         }
