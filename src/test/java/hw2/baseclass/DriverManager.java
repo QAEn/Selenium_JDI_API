@@ -1,4 +1,4 @@
-package hw2.baseClass;
+package hw2.baseclass;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +14,11 @@ public class DriverManager {
         options.addArguments("start-maximized");
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        // TODO
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);// TODO
+        // TODO
+
         return driver;
     }
 }

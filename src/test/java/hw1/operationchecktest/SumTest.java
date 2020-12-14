@@ -1,6 +1,6 @@
-package hw1.operationCheckTest;
+package hw1.operationchecktest;
 
-import hw1.dataProviders.SumDataProvider;
+import hw1.dataproviders.SumDataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 

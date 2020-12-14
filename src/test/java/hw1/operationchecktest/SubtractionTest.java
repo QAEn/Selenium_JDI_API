@@ -1,6 +1,6 @@
-package hw1.operationCheckTest;
+package hw1.operationchecktest;
 
-import hw1.dataProviders.SubtractionDataProvider;
+import hw1.dataproviders.SubtractionDataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
@@ -11,7 +11,7 @@ public class SubtractionTest extends AbstractCalculatorTest {
             dataProvider = "Subtraction data provider",
             dataProviderClass = SubtractionDataProvider.class
     )
-    public void dataProviderSubtractionTest(long firstNumber, long secondNumber, long expectedResult) {
+    public void dataProvSubtractionTest(long firstNumber, long secondNumber, long expectedResult) {
         long actualResult = calculator.sub(firstNumber, secondNumber);
         assertEquals(actualResult, expectedResult);
     }

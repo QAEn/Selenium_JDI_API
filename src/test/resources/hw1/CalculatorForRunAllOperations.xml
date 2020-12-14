@@ -3,15 +3,15 @@
 
     <test name="Calculator for sum and subtraction operations">
         <classes>
-            <class name="hw1.operationCheckTest.SubtractionTest"/>
-            <class name="hw1.operationCheckTest.SumTest"/>
+            <class name="hw1.operationchecktest.SubtractionTest"/>
+            <class name="hw1.operationchecktest.SumTest"/>
         </classes>
     </test>
 
     <test name="Calculator for division and multiply operations">
         <classes>
-            <class name="hw1.operationCheckTest.DivisionTest"/>
-            <class name="hw1.operationCheckTest.MultiplyTest"/>
+            <class name="hw1.operationchecktest.DivisionTest"/>
+            <class name="hw1.operationchecktest.MultiplyTest"/>
         </classes>
     </test>
 </suite>
