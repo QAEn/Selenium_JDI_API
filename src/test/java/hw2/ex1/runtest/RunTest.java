@@ -14,6 +14,13 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
+import static org.hamcrest.Matchers.hasItem;
+
 public class RunTest {
 
     private WebDriver driver;
@@ -36,7 +43,7 @@ public class RunTest {
     public void exercise_1_Test() {
         //STEP #1: Open test site by URL
         driver.get("https://jdi-testing.github.io/jdi-light/index.html");
-        wait.until(ExpectedConditions.presenceOfElementLocated((By.tagName("html"))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("html"))));
 
         //STEP #2: Assert Browser title
         softAssertion.assertEquals(driver.getTitle(), "Home Page",
@@ -46,17 +53,14 @@ public class RunTest {
         WebElement loginCaret = driver.findElement(By.xpath("//a[contains(@href, '#')]"));
         loginCaret.click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#name")));
-        WebElement username = driver.findElement(By.cssSelector("#name"));
-        username.sendKeys("Roman");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")))
+                .sendKeys("Roman");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#password")));
-        WebElement pass = driver.findElement(By.cssSelector("#password"));
-        pass.sendKeys("Jdi1234");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#password")))
+                .sendKeys("Jdi1234");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Enter']")));
-        WebElement enterBtn = driver.findElement(By.xpath("//*[text()='Enter']"));
-        enterBtn.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Enter']")))
+                .click();
 
         //STEP #4: Assert Username is logged
         WebElement userName = driver.findElement(By.cssSelector("#user-name"));
@@ -166,34 +170,14 @@ public class RunTest {
 
         //STEP #11: Assert that there are 5 items in the Left Section
         //          are displayed and they have proper text
-
-        //assert "Home"
-        WebElement homeLeftSide = driver.findElement(By.xpath("//span[contains(.,'Home')]"));
-        softAssertion.assertEquals(homeLeftSide.getText(), "Home",
-                "Home item in the left section is not displayed");
-
-        //assert "Contact form"
-        WebElement contactFormLeftSide = driver.findElement(
-                By.xpath("//span[contains(.,'Contact form')]"));
-        softAssertion.assertEquals(contactFormLeftSide.getText(), "Contact form",
-                "Contact form item is not displayed in the left section");
-
-        //assert "Service"
-        WebElement serviceLeftSide = driver.findElement(By.xpath("//span[contains(.,'Service')]"));
-        softAssertion.assertEquals(serviceLeftSide.getText(),"Service",
-                "Service form item is not displayed in the left section");
-
-        //"Metals & Colors"
-        WebElement metalColorsLeftSide = driver.findElement(
-                By.xpath("//span[contains(.,'Metals & Colors')]"));
-        softAssertion.assertEquals(metalColorsLeftSide.getText(), "Metals & Colors",
-                "Metals & Colors form item is not displayed in the left section");
-
-        // assert "Elements packs"
-        WebElement elementsPacksLeftSide = driver.findElement(
-                By.xpath("//span[contains(.,'Elements packs')]"));
-        softAssertion.assertEquals(elementsPacksLeftSide.getText(), "Elements packs",
-                "Elements packs form item is not displayed in the left section");
+        List<WebElement> elements = driver
+                .findElements(By.xpath("//ul[@class='sidebar-menu']"));
+        List<String> texts = elements
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+        String expectedItems = "Home\n" + "Contact form\n" + "Service\n"
+                + "Metals & Colors\n" + "Elements packs";
+        assertThat("None of elements contains sub-string",
+                texts, hasItem(containsString(expectedItems)));
     }
 
     @AfterMethod(alwaysRun = true)

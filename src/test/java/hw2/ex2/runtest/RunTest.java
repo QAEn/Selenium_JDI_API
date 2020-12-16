@@ -13,6 +13,10 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+import java.util.List;
+import java.util.stream.Collectors;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class RunTest {
 
@@ -37,7 +41,7 @@ public class RunTest {
 
         //STEP #1: Open test site by URL
         driver.get("https://jdi-testing.github.io/jdi-light/index.html");
-        wait.until(ExpectedConditions.presenceOfElementLocated((By.tagName("html"))));
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("html"))));
 
         //STEP #2: Assert Browser title
         softAssertion.assertEquals(driver.getTitle(), "Home Page",
@@ -47,17 +51,14 @@ public class RunTest {
         WebElement loginCaret = driver.findElement(By.xpath("//a[contains(@href, '#')]"));
         loginCaret.click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#name")));
-        WebElement username = driver.findElement(By.cssSelector("#name"));
-        username.sendKeys("Roman");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")))
+                .sendKeys("Roman");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#password")));
-        WebElement pass = driver.findElement(By.cssSelector("#password"));
-        pass.sendKeys("Jdi1234");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#password")))
+                .sendKeys("Jdi1234");
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Enter']")));
-        WebElement enterBtn = driver.findElement(By.xpath("//*[text()='Enter']"));
-        enterBtn.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Enter']")))
+                .click();
 
         //STEP #4: Assert User name in the left-top side of screen that user is loggined
         WebElement userName = driver.findElement(By.cssSelector("#user-name"));
@@ -100,6 +101,13 @@ public class RunTest {
         //STEP #9: Assert that each element corresponds to itself with positive status
         //for each checkbox there is an individual log row and value
         // is corresponded to the status of checkbox
+
+        /*List<WebElement> elements = driver
+                .findElements(By.xpath("//*[@id='mCSB_2_container']/section[1]"));
+        List<String> texts = elements
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+        assertThat("None of elements contains sub-string",
+                texts.toString(), stringContainsInOrder("Yellow", "Selen", "true"));*/
 
         //for Water
         WebElement assertCheckBoxWater = driver.findElement(
