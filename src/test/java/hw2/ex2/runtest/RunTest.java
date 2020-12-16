@@ -102,12 +102,15 @@ public class RunTest {
         //for each checkbox there is an individual log row and value
         // is corresponded to the status of checkbox
 
+        //Is this code do soft assert?
         /*List<WebElement> elements = driver
-                .findElements(By.xpath("//*[@id='mCSB_2_container']/section[1]"));
+                .findElements(By.cssSelector("div[name=log-sidebar] div.info-panel-body-log"));
         List<String> texts = elements
                 .stream().map(WebElement::getText).collect(Collectors.toList());
-        assertThat("None of elements contains sub-string",
-                texts.toString(), stringContainsInOrder("Yellow", "Selen", "true"));*/
+        assertThat(texts.toString(), containsString("Water: condition changed to true"));
+        assertThat(texts.toString(), containsString("kjfkjdfon changed to true"));
+        assertThat(texts.toString(), containsString("Selen"));
+        assertThat(texts.toString(), containsString("Yellow"));*/
 
         //for Water
         WebElement assertCheckBoxWater = driver.findElement(
