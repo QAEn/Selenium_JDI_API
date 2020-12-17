@@ -3,13 +3,13 @@
 
     <test name="exercise_1">
         <classes>
-            <class name="hw2.ex1.runtest.RunTest"/>
+            <class name="hw2.ex1.runtest.FirstExerciseRunTest"/>
         </classes>
     </test>
 
     <test name="exercise_2">
         <classes>
-            <class name="hw2.ex2.runtest.RunTest"/>
+            <class name="hw2.ex2.runtest.SecondExerciseRunTest"/>
         </classes>
     </test>
 </suite>

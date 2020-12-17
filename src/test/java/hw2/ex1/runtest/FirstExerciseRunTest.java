@@ -1,96 +1,33 @@
 package hw2.ex1.runtest;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import hw2.baseclass.CoreTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
-import static org.hamcrest.Matchers.hasItem;
-
-public class RunTest {
-
-    private WebDriver driver;
-    private SoftAssert softAssertion;
-    private WebDriverWait wait;
-
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 10);
-        softAssertion = new SoftAssert();
-    }
+public class FirstExerciseRunTest extends CoreTest {
 
     @Test(
             description = "First exercise test, Jira binding cab be here"
     )
     public void exercise_1_Test() {
-        //STEP #1: Open test site by URL
-        driver.get("https://jdi-testing.github.io/jdi-light/index.html");
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("html"))));
 
-        //STEP #2: Assert Browser title
-        softAssertion.assertEquals(driver.getTitle(), "Home Page",
-                "Incorrect Home page title");
-
-        //STEP #3: Perform login
-        WebElement loginCaret = driver.findElement(By.xpath("//a[contains(@href, '#')]"));
-        loginCaret.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")))
-                .sendKeys("Roman");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#password")))
-                .sendKeys("Jdi1234");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Enter']")))
-                .click();
-
-        //STEP #4: Assert Username is logged
-        WebElement userName = driver.findElement(By.cssSelector("#user-name"));
-        softAssertion.assertEquals(userName.getText(), "ROMAN IOVLEV",
-                "Incorrect username");
+        commonSteps.baseMethod();
 
         //STEP #5: Assert that there are 4 items on the header section
         //         are displayed and they have proper texts
-
-        //assert "HOME"
-        WebElement home = driver.findElement(By.xpath("//a[contains(text(),'Home')]"));
-        softAssertion.assertEquals(home.getText(), "HOME",
-                "Incorrect HOME item on the header section");
-
-        //assert "CONTACT FORM"
-        WebElement contactForm = driver.findElement(
-                By.xpath("//a[contains(text(),'Contact form')]"));
-        softAssertion.assertEquals(contactForm.getText(), "CONTACT FORM",
-                "Incorrect CONTACT FORM item on the header section");
-
-        //assert "SERVICE"
-        WebElement service = driver.findElement(By.xpath("//a[contains(text(),'Service')]"));
-        softAssertion.assertEquals(service.getText(), "SERVICE",
-                "Incorrect SERVICE item on the header section");
-
-        //"METALS & COLORS"
-        WebElement metalColors = driver.findElement(
-                By.xpath("//a[contains(text(),'Metals & Colors')]"));
-        softAssertion.assertEquals(metalColors.getText(), "METALS & COLORS",
-                "Incorrect METALS & COLORS item on the header section");
+        List<WebElement> elementsHeader = driver
+                .findElements(By.cssSelector(".uui-navigation.nav.navbar-nav.m-l8"));
+        List<String> textsHeader = elementsHeader
+                .stream().map(WebElement::getText).collect(Collectors.toList());
+        softAssertion.assertEquals(textsHeader, Arrays.asList("HOME\n"
+                + "CONTACT FORM\n"
+                + "SERVICE\n"
+                + "METALS & COLORS"));
 
         //STEP #6: Assert that there are 4 images on the Index Page and they are displayed
         //microscopeImg
@@ -150,13 +87,13 @@ public class RunTest {
                 "Rocket text is not displayed under icon");
 
         //STEP #8: Assert that there is the iframe with “Frame Button” exist
-        WebElement iframe = driver.findElement(By.xpath("//iframe[@id='frame']"));
+        WebElement iframe = driver.findElement(By.cssSelector("iframe#frame"));
         Assert.assertEquals(iframe.getText(),
                 "<p>Your browser does not support iframes.</p>",
                 "The iframe with “Frame Button” isn't exist");
 
         //STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
-        WebElement switchIframe = driver.findElement(By.xpath("//iframe[@id='frame']"));
+        WebElement switchIframe = driver.findElement(By.cssSelector("iframe#frame"));
         driver.switchTo().frame(switchIframe);
         String iframeBtnStr = "//input[@id='frame-button']";
         String actual = driver.findElement(By.xpath(iframeBtnStr)).getAttribute("value");
@@ -171,20 +108,12 @@ public class RunTest {
         //STEP #11: Assert that there are 5 items in the Left Section
         //          are displayed and they have proper text
         List<WebElement> elements = driver
-                .findElements(By.xpath("//ul[@class='sidebar-menu']"));
+                .findElements(By.cssSelector("ul.sidebar-menu"));
         List<String> texts = elements
                 .stream().map(WebElement::getText).collect(Collectors.toList());
-        String expectedItems = "Home\n" + "Contact form\n" + "Service\n"
-                + "Metals & Colors\n" + "Elements packs";
-        assertThat("None of elements contains sub-string",
-                texts, hasItem(containsString(expectedItems)));
-    }
+        softAssertion.assertEquals(texts, Arrays.asList("Home\n" + "Contact form\n" + "Service\n"
+                + "Metals & Colors\n" + "Elements packs"));
 
-    @AfterMethod(alwaysRun = true)
-    public void browserTearDown() {
-        //STEP #12: Close Browser
-        driver.quit();
-        driver = null;
         softAssertion.assertAll();
     }
 }

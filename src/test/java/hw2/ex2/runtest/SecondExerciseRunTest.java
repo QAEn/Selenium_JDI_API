@@ -1,69 +1,20 @@
 package hw2.ex2.runtest;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
+import hw2.baseclass.CoreTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.openqa.selenium.WebDriver;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import java.util.List;
-import java.util.stream.Collectors;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
-public class RunTest {
-
-    private WebDriver driver;
-    private SoftAssert softAssertion;
-    private WebDriverWait wait;
-
-    @BeforeMethod(alwaysRun = true)
-    public void browserSetup() {
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, 5);
-        softAssertion = new SoftAssert();
-    }
+public class SecondExerciseRunTest extends CoreTest {
 
     @Test(
             description = "Second exercise test, Jira binding cab be here"
     )
     public void exercise_2_Test() {
 
-        //STEP #1: Open test site by URL
-        driver.get("https://jdi-testing.github.io/jdi-light/index.html");
-        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("html"))));
-
-        //STEP #2: Assert Browser title
-        softAssertion.assertEquals(driver.getTitle(), "Home Page",
-                "Incorrect page title");
-
-        //STEP #3: Perform login
-        WebElement loginCaret = driver.findElement(By.xpath("//a[contains(@href, '#')]"));
-        loginCaret.click();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")))
-                .sendKeys("Roman");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#password")))
-                .sendKeys("Jdi1234");
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Enter']")))
-                .click();
-
-        //STEP #4: Assert User name in the left-top side of screen that user is loggined
-        WebElement userName = driver.findElement(By.cssSelector("#user-name"));
-        softAssertion.assertEquals(userName.getText(), "ROMAN IOVLEV",
-                "Incorrect username");
+        commonSteps.baseMethod();
 
         //STEP #5: Open through the header menu Service -> Different Elements Page
         //click Service header menu
@@ -72,7 +23,7 @@ public class RunTest {
 
         //click Different Elements
         WebElement differentElements = driver.findElement(
-                By.xpath("//a[contains(@href, 'different-elements.html')]"));
+                By.cssSelector("a[href*='different-elements.html']"));
         differentElements.click();
         wait.until(ExpectedConditions.titleContains("Different Elements"));
 
@@ -102,7 +53,7 @@ public class RunTest {
         //for each checkbox there is an individual log row and value
         // is corresponded to the status of checkbox
 
-        //Is this code do soft assert?
+        //Is this code do soft assert? <---- !!!NOPE!!! note for future
         /*List<WebElement> elements = driver
                 .findElements(By.cssSelector("div[name=log-sidebar] div.info-panel-body-log"));
         List<String> texts = elements
@@ -142,13 +93,7 @@ public class RunTest {
         softAssertion.assertTrue(actualDropdown.contains("Colors")
                         && actualDropdown.endsWith("Yellow"),
                 "Log row and (or) value isn't corresponded to the status of selected value");
-    }
 
-    @AfterMethod(alwaysRun = true)
-    public void browserTearDown() {
-        //STEP #10: Close Browser
-        driver.quit();
-        driver = null;
         softAssertion.assertAll();
     }
 }
