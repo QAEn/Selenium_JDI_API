@@ -94,8 +94,8 @@ public class FirstExerciseRunTest extends CoreTest {
         //STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
         WebElement switchIframe = driver.findElement(By.cssSelector("iframe#frame"));
         driver.switchTo().frame(switchIframe);
-        String iframeBtnStr = "//input[@id='frame-button']";
-        String actual = driver.findElement(By.xpath(iframeBtnStr)).getAttribute("value");
+        String iframeBtnStr = "frame-button";
+        String actual = driver.findElement(By.id(iframeBtnStr)).getAttribute("value");
         String expected = "Frame Button";
         softAssertion.assertEquals(actual, expected);
 

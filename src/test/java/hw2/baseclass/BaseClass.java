@@ -29,7 +29,7 @@ public class BaseClass {
                 "Incorrect page title");
 
         //STEP #3: Perform login
-        WebElement loginCaret = driver.findElement(By.xpath("//a[contains(@href, '#')]"));
+        WebElement loginCaret = driver.findElement(By.id("user-icon"));
         loginCaret.click();
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#name")))
@@ -42,7 +42,7 @@ public class BaseClass {
                 .click();
 
         //STEP #4: Assert User name in the left-top side of screen that user is loggined
-        WebElement userName = driver.findElement(By.cssSelector("#user-name"));
+        WebElement userName = driver.findElement(By.xpath("//*[text()='Roman Iovlev']"));
         softAssertion.assertEquals(userName.getText(), "ROMAN IOVLEV",
                 "Incorrect username");
     }
