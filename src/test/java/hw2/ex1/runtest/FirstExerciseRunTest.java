@@ -3,7 +3,6 @@ package hw2.ex1.runtest;
 import hw2.baseclass.CoreTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.Arrays;
 import java.util.List;
@@ -88,7 +87,7 @@ public class FirstExerciseRunTest extends CoreTest {
 
         //STEP #8: Assert that there is the iframe with “Frame Button” exist
         WebElement iframe = driver.findElement(By.cssSelector("iframe#frame"));
-        Assert.assertEquals(iframe.getText(),
+        softAssertion.assertEquals(iframe.getText(),
                 "<p>Your browser does not support iframes.</p>",
                 "The iframe with “Frame Button” isn't exist");
 
