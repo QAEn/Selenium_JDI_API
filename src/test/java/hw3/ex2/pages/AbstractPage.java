@@ -13,6 +13,7 @@ public abstract class AbstractPage {
     public GetProperties getProperties = new GetProperties(SECOND_EXERCISE);
 
     public abstract void openPage();
+
     public abstract void checkTitle();
 
     public AbstractPage(WebDriver driver, SoftAssert softAssertion) {

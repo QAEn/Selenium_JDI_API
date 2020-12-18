@@ -56,6 +56,13 @@
                 <suite.file>${project.basedir}/src/test/resources/hw2/suite/SuiteHW2.xml</suite.file>
             </properties>
         </profile>
+
+        <profile>
+            <id>hw3</id>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw3/suite/SuiteHW3.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>

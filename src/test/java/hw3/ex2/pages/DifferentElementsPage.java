@@ -16,12 +16,14 @@ public class DifferentElementsPage extends AbstractPage {
     public void openPage() {
         //click Service header menu
         String serviceHeaderElementProperty = getProperties.getResource("serviceHeaderElement");
-        WebElement serviceHeaderElement = driver.findElement(By.xpath(serviceHeaderElementProperty));
+        WebElement serviceHeaderElement = driver
+                .findElement(By.xpath(serviceHeaderElementProperty));
         serviceHeaderElement.click();
 
         //click Different Elements
         String differentElementsProperty = getProperties.getResource("differentElements");
-        WebElement differentElements = driver.findElement(By.cssSelector(differentElementsProperty));
+        WebElement differentElements = driver
+                .findElement(By.cssSelector(differentElementsProperty));
         differentElements.click();
     }
 
@@ -101,14 +103,18 @@ public class DifferentElementsPage extends AbstractPage {
         String assertRadioBtnProperty = getProperties.getResource("assertRadioBtn");
         WebElement assertRadioBtn = driver.findElement(By.xpath(assertRadioBtnProperty));
         String actualRadioBtn = assertRadioBtn.getText();
-        softAssertion.assertTrue(actualRadioBtn.contains("metal") && actualRadioBtn.endsWith("Selen"),
-                "Log row and (or) value isn't corresponded to the status of Selen's radio button");
+        softAssertion.assertTrue(
+                actualRadioBtn.contains("metal") && actualRadioBtn.endsWith("Selen"),
+                "Log row and (or) value isn't corresponded to the status of Selen's radio button"
+        );
 
         //for dropdown there is a log row and value is corresponded to the selected value
         String assertDropdownProperty = getProperties.getResource("assertDropdown");
         WebElement assertDropdown = driver.findElement(By.xpath(assertDropdownProperty));
         String actualDropdown = assertDropdown.getText();
-        softAssertion.assertTrue(actualDropdown.contains("Colors") && actualDropdown.endsWith("Yellow"),
-                "Log row and (or) value isn't corresponded to the status of selected value");
+        softAssertion.assertTrue(
+                actualDropdown.contains("Colors") && actualDropdown.endsWith("Yellow"),
+                "Log row and (or) value isn't corresponded to the status of selected value"
+        );
     }
 }
