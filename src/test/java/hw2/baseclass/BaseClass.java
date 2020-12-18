@@ -42,7 +42,7 @@ public class BaseClass {
                 .click();
 
         //STEP #4: Assert User name in the left-top side of screen that user is loggined
-        WebElement userName = driver.findElement(By.xpath("//*[text()='Roman Iovlev']"));
+        WebElement userName = driver.findElement(By.cssSelector("#user-name"));
         softAssertion.assertEquals(userName.getText(), "ROMAN IOVLEV",
                 "Incorrect username");
     }

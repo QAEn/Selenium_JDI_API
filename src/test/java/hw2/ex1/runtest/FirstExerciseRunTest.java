@@ -106,12 +106,12 @@ public class FirstExerciseRunTest extends CoreTest {
 
         //STEP #11: Assert that there are 5 items in the Left Section
         //          are displayed and they have proper text
-        List<WebElement> elements = driver
-                .findElements(By.cssSelector("ul.sidebar-menu"));
-        List<String> texts = elements
-                .stream().map(WebElement::getText).collect(Collectors.toList());
-        softAssertion.assertEquals(texts, Arrays.asList("Home\n" + "Contact form\n" + "Service\n"
-                + "Metals & Colors\n" + "Elements packs"));
+        List<WebElement> elements = driver.findElements(By.cssSelector("ul.sidebar-menu > li"));
+        List<String> texts = elements.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        softAssertion.assertEquals(texts,
+        Arrays.asList("Home", "Contact form", "Service", "Metals & Colors", "Elements packs"));
 
         softAssertion.assertAll();
     }
