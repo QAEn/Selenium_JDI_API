@@ -6,18 +6,18 @@ public class GetProperties {
 
     private ResourceBundle myBundle;
 
-    public enum NumberOfExercise {
-        FIRST_EXERCISE,
-        SECOND_EXERCISE
+    public enum NameOfProperty {
+        EXERCISE,
+        USER_DATA
     }
 
-    public GetProperties(NumberOfExercise numberOfExercise) {
+    public GetProperties(NameOfProperty numberOfExercise) {
         switch (numberOfExercise) {
-            case FIRST_EXERCISE:
-                myBundle = ResourceBundle.getBundle("hw3/properties/exercise_1");
+            case EXERCISE:
+                myBundle = ResourceBundle.getBundle("hw3/properties/exercise");
                 break;
-            case SECOND_EXERCISE:
-                myBundle = ResourceBundle.getBundle("hw3/properties/exercise_2");
+            case USER_DATA:
+                myBundle = ResourceBundle.getBundle("hw3/properties/userdata");
                 break;
             default:
                 //уточнить как элегантно обработать кэйс по умолчанию

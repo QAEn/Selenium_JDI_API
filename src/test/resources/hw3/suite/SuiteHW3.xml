@@ -9,7 +9,7 @@
 
     <test name="exercise_2">
         <classes>
-            <class name="hw3.ex2.runtest.RunTest"/>
+            <class name="hw3.ex2.runtest.SecondExerciseRunTest"/>
         </classes>
     </test>
 </suite>

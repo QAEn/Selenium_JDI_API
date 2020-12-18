@@ -1,8 +1,9 @@
 package hw3.ex1.pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.testng.asserts.SoftAssert;
 import java.util.Arrays;
 import java.util.List;
@@ -10,9 +11,36 @@ import java.util.stream.Collectors;
 
 public class HomePage extends AbstractPage {
 
+    @FindBy(css = ".uui-navigation.nav.navbar-nav.m-l8")
+    List<WebElement> elementsHeader;
+
+    @FindBy(css = ".icon-custom")
+    WebElement microscopeImg;
+    @FindBy(css = ".icon-multi")
+    WebElement headphonesImg;
+    @FindBy(css = ".icon-practise")
+    WebElement monitorImg;
+    @FindBy(css = ".icon-base")
+    WebElement rocketImg;
+
+    @FindBy(xpath = "//span[contains(text(),'To include good practices')]")
+    WebElement microscopeTxt;
+    @FindBy(xpath = "//span[contains(text(),'To be flexible and')]")
+    WebElement headphonesTxt;
+    @FindBy(xpath = "//span[contains(text(),'To be multiplatform')]")
+    WebElement monitorTxt;
+    @FindBy(xpath = "//span[contains(text(),'Already have good base')]")
+    WebElement rocketTxt;
+
+    @FindBy(css = "iframe#frame")
+    WebElement iframe;
+
+    @FindBy(css = "ul.sidebar-menu")
+    List<WebElement> elementsLeft;
+
     public HomePage(WebDriver driver, SoftAssert softAssertion) {
-        this.driver = driver;
-        this.softAssertion = softAssertion;
+        super(driver, softAssertion);
+        PageFactory.initElements(driver, this);
     }
 
     //STEP #5: Assert that there are 4 items on the header
@@ -20,9 +48,6 @@ public class HomePage extends AbstractPage {
     //DATA: "HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"
     //EXPECTED RESULT: Menu buttons are displayed and have proper texts
     public void assertHeaderItems() {
-        String elementsHeaderProperty = getProperties.getResource("elementsHeader");
-        List<WebElement> elementsHeader = driver
-                .findElements(By.cssSelector(elementsHeaderProperty));
         List<String> textsHeader = elementsHeader
                 .stream().map(WebElement::getText).collect(Collectors.toList());
         softAssertion.assertEquals(textsHeader, Arrays.asList("HOME\n"
@@ -36,26 +61,18 @@ public class HomePage extends AbstractPage {
     //EXPECTED RESULT: Images are displayed
     public void assertImages() {
         //microscopeImg
-        String microscopeImgProperty = getProperties.getResource("microscopeImg");
-        WebElement microscopeImg = driver.findElement(By.cssSelector(microscopeImgProperty));
         softAssertion.assertTrue(microscopeImg.isDisplayed(),
                 "Microscope image is not displayed");
 
         //headphonesImg
-        String headphonesProperty = getProperties.getResource("headphonesImg");
-        WebElement headphonesImg = driver.findElement(By.cssSelector(headphonesProperty));
         softAssertion.assertTrue(headphonesImg.isDisplayed(),
                 "Headphones image is not displayed");
 
         //monitorImg
-        String monitorProperty = getProperties.getResource("monitorImg");
-        WebElement monitorImg = driver.findElement(By.cssSelector(monitorProperty));
         softAssertion.assertTrue(monitorImg.isDisplayed(),
                 "Monitor image is not displayed");
 
         //rocketImg
-        String rocketProperty = getProperties.getResource("rocketImg");
-        WebElement rocketImg = driver.findElement(By.cssSelector(rocketProperty));
         softAssertion.assertTrue(rocketImg.isDisplayed(),
                 "Rocket image is not displayed");
     }
@@ -65,8 +82,6 @@ public class HomePage extends AbstractPage {
     //EXPECTED RESULT: Texts are displayed and equal to expected
     public void assertText() {
         //microscopeTxt
-        String microscopeProperty = getProperties.getResource("microscopeTxt");
-        WebElement microscopeTxt = driver.findElement(By.xpath(microscopeProperty));
         softAssertion.assertEquals(microscopeTxt.getText(),
                 "To include good practices\n"
                         + "and ideas from successful\n"
@@ -74,23 +89,17 @@ public class HomePage extends AbstractPage {
                 "Microscope text is not displayed under icon");
 
         //headphonesTxt
-        String headphonesProperty = getProperties.getResource("headphonesTxt");
-        WebElement headphonesTxt = driver.findElement(By.xpath(headphonesProperty));
         softAssertion.assertEquals(headphonesTxt.getText(),
                 "To be flexible and\n"
                         + "customizable",
                 "Headphone text is not displayed under icon");
 
         //monitorTxt
-        String monitorProperty = getProperties.getResource("monitorTxt");
-        WebElement monitorTxt = driver.findElement(By.xpath(monitorProperty));
         softAssertion.assertEquals(monitorTxt.getText(),
                 "To be multiplatform",
                 "Monitor text is not displayed under icon");
 
         //rocketTxt
-        String rocketProperty = getProperties.getResource("rocketTxt");
-        WebElement rocketTxt = driver.findElement(By.xpath(rocketProperty));
         softAssertion.assertEquals(rocketTxt.getText(),
                 "Already have good base\n"
                         + "(about 20 internal and\n"
@@ -103,24 +112,9 @@ public class HomePage extends AbstractPage {
     //DATA: -
     //EXPECTED RESULT: The iframe exists
     public void iframeWithButtonExists() {
-        String iframeProperty = getProperties.getResource("iframe");
-        WebElement iframe = driver.findElement(By.cssSelector(iframeProperty));
         softAssertion.assertEquals(iframe.getText(),
                 "<p>Your browser does not support iframes.</p>",
                 "The iframe with “Frame Button” isn't exist");
-    }
-
-    //     * STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
-    //     * DATA: -
-    //     * EXPECTED RESULT: The “Frame Button” exists
-    public void frameButtonExists() {
-        String iframeProperty = getProperties.getResource("iframe");
-        WebElement switchIframe = driver.findElement(By.cssSelector(iframeProperty));
-        driver.switchTo().frame(switchIframe);
-        String iframeBtnStr = getProperties.getResource("iframeBtn");
-        String actual = driver.findElement(By.id(iframeBtnStr)).getAttribute("value");
-        String expected = "Frame Button";
-        softAssertion.assertEquals(actual, expected);
     }
 
     //STEP #10: Switch to original window back
@@ -135,10 +129,7 @@ public class HomePage extends AbstractPage {
     //DATA:  “Home”, “Contact form”, “Service”, “Metals & Colors”, “Elements packs”
     //EXPECTED RESULT: Left section menu items are displayed and have proper text
     public void assertLeftSectionItems() {
-        String iframeBtnStr = getProperties.getResource("elementsLeft");
-        List<WebElement> elements = driver
-                .findElements(By.cssSelector(iframeBtnStr));
-        List<String> texts = elements
+        List<String> texts = elementsLeft
                 .stream().map(WebElement::getText).collect(Collectors.toList());
         softAssertion.assertEquals(texts, Arrays.asList("Home\n" + "Contact form\n" + "Service\n"
                 + "Metals & Colors\n" + "Elements packs"));

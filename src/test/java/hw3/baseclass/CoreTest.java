@@ -9,7 +9,7 @@ import org.testng.asserts.SoftAssert;
 public abstract class CoreTest {
 
     public WebDriver driver;
-    public SoftAssert softAssertion; //delete todo
+    public SoftAssert softAssertion;
     public WebDriverWait wait;
     public BaseClass commonSteps;
 

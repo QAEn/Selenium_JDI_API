@@ -1,18 +1,21 @@
 package hw3.ex1.runtest;
 
 import hw3.baseclass.CoreTest;
+import hw3.ex1.pages.FramePage;
 import hw3.ex1.pages.HomePage;
 import org.testng.annotations.Test;
 
 public class FirstExerciseRunTest extends CoreTest {
 
     private HomePage homePage;
+    private FramePage framePage;
 
     @Test(
             description = "First exercise test, Jira binding cab be here"
     )
     public void exercise_1_Test() {
         homePage = new HomePage(driver, softAssertion);
+        framePage = new FramePage(driver, softAssertion);
 
         //STEP #1: Open test site by URL
         commonSteps.openPage();
@@ -41,7 +44,7 @@ public class FirstExerciseRunTest extends CoreTest {
         homePage.iframeWithButtonExists();
 
         //STEP #9: Switch to the iframe and check that there is “Frame Button” in the iframe
-        homePage.frameButtonExists();
+        framePage.frameButtonExists();
 
         //STEP #10: Switch to original window back
         homePage.switchHomePage();

@@ -4,7 +4,7 @@ import hw3.baseclass.CoreTest;
 import hw3.ex2.pages.DifferentElementsPage;
 import org.testng.annotations.Test;
 
-public class RunTest extends CoreTest {
+public class SecondExerciseRunTest extends CoreTest {
 
     private DifferentElementsPage differentElementsPage;
 
