@@ -1,4 +1,4 @@
-package hw1.operationCheckTest;
+package hw1.operationchecktest;
 
 import com.epam.tat.module4.Calculator;
 import org.testng.annotations.AfterMethod;

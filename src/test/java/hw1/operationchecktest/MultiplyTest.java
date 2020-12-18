@@ -1,6 +1,6 @@
-package hw1.operationCheckTest;
+package hw1.operationchecktest;
 
-import hw1.dataProviders.MultiplyDataProvider;
+import hw1.dataproviders.MultiplyDataProvider;
 import org.testng.annotations.Test;
 import static org.testng.Assert.assertEquals;
 
