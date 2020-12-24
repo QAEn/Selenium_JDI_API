@@ -8,7 +8,8 @@ public class GetProperties {
 
     public enum NameOfProperty {
         EXERCISE,
-        USER_DATA
+        USER_DATA,
+        EXERCISE_DATA
     }
 
     public GetProperties(NameOfProperty numberOfExercise) {
@@ -18,6 +19,9 @@ public class GetProperties {
                 break;
             case USER_DATA:
                 myBundle = ResourceBundle.getBundle("hw3/properties/userdata");
+                break;
+            case EXERCISE_DATA:
+                myBundle = ResourceBundle.getBundle("hw3/testdata/data");
                 break;
             default:
                 //уточнить как элегантно обработать кэйс по умолчанию

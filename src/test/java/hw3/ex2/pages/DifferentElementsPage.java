@@ -1,46 +1,44 @@
 package hw3.ex2.pages;
 
+import hw3.baseclass.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.asserts.SoftAssert;
 
-import java.util.List;
+import static hw3.baseclass.GetProperties.NameOfProperty.EXERCISE_DATA;
 
 public class DifferentElementsPage extends AbstractPage {
-
-    @FindBy(css = ".uui-navigation.nav.navbar-nav.m-l8")
-    List<WebElement> elementsHeader;
-
     @FindBy(xpath = "//li[3]/a[1]")
-    WebElement serviceHeaderElement;
+    protected WebElement serviceHeaderElement;
     @FindBy(css = ".dropdown-menu > li:nth-child(8) > a")
-    WebElement differentElements;
+    protected WebElement differentElements;
 
     @FindBy(xpath = "//input[@type='checkbox']")
-    WebElement water;
+    protected WebElement water;
     @FindBy(xpath = "//label[3]/input")
-    WebElement wind;
+    protected WebElement wind;
 
     @FindBy(xpath = "//div[3]/label[4]/input")
-    WebElement selen;
+    protected WebElement selen;
 
     @FindBy(xpath = "//select")
-    WebElement dropdown;
+    protected WebElement dropdown;
 
     @FindBy(xpath = "//li[contains(text(),'Water: condition changed to true')]")
-    WebElement assertCheckBoxWater;
+    private WebElement assertCheckBoxWater;
     @FindBy(xpath = "//li[contains(text(),'Wind: condition changed to true')]")
-    WebElement assertCheckBoxWind;
+    private WebElement assertCheckBoxWind;
     @FindBy(xpath = "//li[contains(text(),'Selen')]")
-    WebElement assertRadioBtn;
+    private WebElement assertRadioBtn;
     @FindBy(xpath = "//li[contains(text(),'Color')]")
-    WebElement assertDropdown;
+    private WebElement assertDropdown;
 
-    public DifferentElementsPage(WebDriver driver, SoftAssert softAssertion) {
-        super(driver, softAssertion);
+    private GetProperties getExerciseDataProperties = new GetProperties(EXERCISE_DATA);
+
+    public DifferentElementsPage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -51,12 +49,6 @@ public class DifferentElementsPage extends AbstractPage {
 
         //click Different Elements
         differentElements.click();
-    }
-
-    @Override
-    public void checkTitle() {
-        softAssertion.assertEquals(driver.getTitle(), "Different Elements",
-                "Incorrect Different Elements page title");
     }
 
     //STEP #6: Select checkboxes
@@ -83,48 +75,24 @@ public class DifferentElementsPage extends AbstractPage {
     public void selectInDropdown() {
         dropdown.click();
         Select color = new Select(dropdown);
-        color.selectByVisibleText("Yellow");
+        String selectColor = getExerciseDataProperties
+                .getResource("selectInDropdown");
+        color.selectByVisibleText(selectColor);
     }
 
-    //STEP #9:
-    //Assert that:
-    //-for each checkbox there is an individual log row and value
-    //  is corresponded to the status of checkbox
-    //-for radio button there is a log row and value is corresponded to the status of radio button
-    //-for dropdown there is a log row and value is corresponded to the selected value.
-    //DATA: -
-    //EXPECTED RESULT:
-    //Log rows are displayed and
-    //-checkbox name and its status are corresponding to selected
-    //-radio button name and it status is corresponding to selected
-    //-dropdown name and selected value is corresponding to selected
-    public void assertActions() {
-        //for each checkbox there is an individual log row and value
-        // is corresponded to the status of checkbox
+    public WebElement getAssertCheckBoxWater() {
+        return assertCheckBoxWater;
+    }
 
-        //for Water
-        String actualWater = assertCheckBoxWater.getText();
-        softAssertion.assertTrue(actualWater.contains("Water") && actualWater.endsWith("true"),
-                "Log row and (or) value isn't corresponded to the status of Water's checkbox");
+    public WebElement getAssertCheckBoxWind() {
+        return assertCheckBoxWind;
+    }
 
-        //for Wind
-        String actualWind = assertCheckBoxWind.getText();
-        softAssertion.assertTrue(actualWind.contains("Wind") && actualWind.endsWith("true"),
-                "Log row and (or) value isn't corresponded to the status of Wind's checkbox");
+    public WebElement getAssertRadioBtn() {
+        return assertRadioBtn;
+    }
 
-        //for radio button there is a log row and value
-        //is corresponded to the status of radio button
-        String actualRadioBtn = assertRadioBtn.getText();
-        softAssertion.assertTrue(
-                actualRadioBtn.contains("metal") && actualRadioBtn.endsWith("Selen"),
-                "Log row and (or) value isn't corresponded to the status of Selen's radio button"
-        );
-
-        //for dropdown there is a log row and value is corresponded to the selected value
-        String actualDropdown = assertDropdown.getText();
-        softAssertion.assertTrue(
-                actualDropdown.contains("Colors") && actualDropdown.endsWith("Yellow"),
-                "Log row and (or) value isn't corresponded to the status of selected value"
-        );
+    public WebElement getAssertDropdown() {
+        return assertDropdown;
     }
 }
