@@ -257,6 +257,8 @@ nbdist/
 
 **/.idea
 **/*.iml
+**/allure-results
+**/.allure
 
 # CMake
 cmake-build-*/
