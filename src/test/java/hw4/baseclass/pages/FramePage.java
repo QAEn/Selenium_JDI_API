@@ -1,9 +1,8 @@
-package hw4.ex1.pages;
+package hw4.baseclass.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class FramePage extends AbstractPage {
 
@@ -14,7 +13,6 @@ public class FramePage extends AbstractPage {
 
     public FramePage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
     public WebElement getIframe() {

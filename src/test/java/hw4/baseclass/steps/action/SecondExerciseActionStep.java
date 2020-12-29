@@ -1,6 +1,6 @@
-package hw4.ex2.steps;
+package hw4.baseclass.steps.action;
 
-import hw4.ex2.pages.DifferentElementsPage;
+import hw4.baseclass.pages.DifferentElementsPage;
 import org.openqa.selenium.WebDriver;
 import io.qameta.allure.Step;
 

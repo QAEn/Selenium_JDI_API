@@ -1,6 +1,10 @@
 package hw4.ex2.runtest;
 
 import hw4.baseclass.CoreTest;
+import hw4.baseclass.dataprovider.AssertDataProvider;
+import hw4.baseclass.entity.User;
+import hw4.baseclass.pages.DifferentElementsPage;
+import hw4.baseclass.pages.HomePage;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
@@ -9,25 +13,44 @@ import org.testng.annotations.Test;
 @Story("Homework #4")
 public class SecondExerciseRunTest extends CoreTest {
 
+    protected HomePage homePage;
+    protected DifferentElementsPage differentElementsPage;
+    protected AssertDataProvider assertDataProvider;
+
     @Test(
             description = "Second exercise test, Jira binding cab be here"
     )
     public void exercise_2_Test() {
+        homePage = new HomePage(driver, wait);
+        differentElementsPage = new DifferentElementsPage(driver);
+        assertDataProvider = new AssertDataProvider();
+
         //STEP #1: Open test site by URL
-        commonActionStep.openTestSite();
+        homePage.openPage();
 
         //STEP #2: Assert Browser title
-        commonAssertSteps.assertBrowserTitle();
+        commonAssertSteps.assertBrowserTitle(
+                driver.getTitle(),
+                assertDataProvider.getExpectedTitleName()
+        );
 
         //STEP #3: Perform login
-        commonActionStep.performLogin();
+        homePage.login(
+                assertDataProvider.getLoginUserName(),
+                assertDataProvider.getPassword());
 
         //STEP #4: Assert Username is logged
-        commonAssertSteps.assertUserName();
+        commonAssertSteps.assertUserName(
+                homePage.getUserName(),
+                User.getName().toUpperCase()
+        );
 
         //STEP #5: Open through the header menu Service -> Different Elements Page
         secondExerciseActionStep.openPage();
-        secondExerciseAssertionStep.assertTitle();
+        secondExerciseAssertionStep.assertTitle(
+                driver.getTitle(),
+                assertDataProvider.getAssertTitle()
+        );
 
         //STEP #6: Select checkboxes
         secondExerciseActionStep.selectCheckboxes();
@@ -39,7 +62,12 @@ public class SecondExerciseRunTest extends CoreTest {
         secondExerciseActionStep.selectInDropdown();
 
         //STEP #9: Assert that each element corresponds to itself with positive status
-        secondExerciseAssertionStep.assertActions();
+        secondExerciseAssertionStep.assertActions(
+                differentElementsPage.getAssertCheckBoxWater().getText(),
+                differentElementsPage.getAssertCheckBoxWind().getText(),
+                differentElementsPage.getAssertRadioBtn().getText(),
+                differentElementsPage.getAssertDropdown().getText()
+        );
 
         commonAssertSteps.checkAll();
     }

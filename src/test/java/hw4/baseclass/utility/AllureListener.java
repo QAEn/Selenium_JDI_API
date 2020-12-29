@@ -1,4 +1,4 @@
-package hw4.baseclass;
+package hw4.baseclass.utility;
 
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;

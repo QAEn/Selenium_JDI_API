@@ -1,10 +1,18 @@
-package hw4.ex1.pages;
+package hw4.baseclass.pages;
 
+import hw4.baseclass.utility.GetProperties;
+import hw4.baseclass.entity.User;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.util.List;
+
+import static hw4.baseclass.utility.GetProperties.NameOfProperty.EXERCISE;
 
 public class HomePage extends AbstractPage {
 
@@ -35,9 +43,49 @@ public class HomePage extends AbstractPage {
     @FindBy(css = "ul.sidebar-menu")
     private List<WebElement> elementsLeft;
 
-    public HomePage(WebDriver driver) {
+    @FindBy(id = "user-icon")
+    private WebElement loginCaret;
+
+    @FindBy(css = "#name")
+    private WebElement username;
+
+    @FindBy(css = "#password")
+    private WebElement pass;
+
+    @FindBy(id = "login-button")
+    private WebElement enterBtn;
+
+    @FindBy(id = "user-name")
+    private WebElement getUsername;
+
+
+    private WebDriverWait wait;
+    private GetProperties getExerciseProperties = new GetProperties(EXERCISE);
+
+    public HomePage(WebDriver driver, WebDriverWait wait) {
         super(driver);
-        PageFactory.initElements(driver, this);
+        this.wait = wait;
+    }
+
+    @Step("STEP #1: Open test site by URL")
+    public void openPage() {
+        driver.get(getExerciseProperties.getResource("homePageURL"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By.tagName("html"))));
+    }
+
+    @Step("STEP #3: Perform login")
+    public void login(String userName, String password) {
+        User.getInstance(userName, password);
+
+        loginCaret.click();
+
+        username.sendKeys(User.getName().substring(0,5));
+        pass.sendKeys(User.getPassword());
+        enterBtn.click();
+    }
+
+    public String getUserName() {
+        return getUsername.getText();
     }
 
     //STEP #10: Switch to original window back

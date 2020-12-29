@@ -1,4 +1,4 @@
-package hw4.baseclass;
+package hw4.baseclass.webdriver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

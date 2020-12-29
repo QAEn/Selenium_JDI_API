@@ -1,12 +1,11 @@
-package hw4.ex2.pages;
+package hw4.baseclass.pages;
 
-import hw4.baseclass.GetProperties;
+import hw4.baseclass.utility.GetProperties;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import static hw4.baseclass.GetProperties.NameOfProperty.EXERCISE_DATA;
+import static hw4.baseclass.utility.GetProperties.NameOfProperty.EXERCISE_DATA;
 
 public class DifferentElementsPage extends AbstractPage {
     @FindBy(xpath = "//li[3]/a[1]")
@@ -38,10 +37,8 @@ public class DifferentElementsPage extends AbstractPage {
 
     public DifferentElementsPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(driver, this);
     }
 
-    @Override
     public void openPage() {
         //click Service header menu
         serviceHeaderElement.click();

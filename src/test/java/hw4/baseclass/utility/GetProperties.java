@@ -1,4 +1,4 @@
-package hw4.baseclass;
+package hw4.baseclass.utility;
 
 import java.util.ResourceBundle;
 
@@ -8,7 +8,6 @@ public class GetProperties {
 
     public enum NameOfProperty {
         EXERCISE,
-        USER_DATA,
         EXERCISE_DATA
     }
 
@@ -16,9 +15,6 @@ public class GetProperties {
         switch (numberOfExercise) {
             case EXERCISE:
                 myBundle = ResourceBundle.getBundle("hw4/properties/exercise");
-                break;
-            case USER_DATA:
-                myBundle = ResourceBundle.getBundle("hw4/properties/userdata");
                 break;
             case EXERCISE_DATA:
                 myBundle = ResourceBundle.getBundle("hw4/testdata/data");

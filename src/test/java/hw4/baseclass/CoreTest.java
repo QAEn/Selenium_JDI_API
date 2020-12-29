@@ -1,13 +1,12 @@
 package hw4.baseclass;
 
-import hw4.baseclass.commonsteps.CommonActionStep;
-import hw4.baseclass.commonsteps.CommonAssertSteps;
-import hw4.ex1.pages.FramePage;
-import hw4.ex1.pages.HomePage;
-import hw4.ex1.steps.FirstExerciseActionStep;
-import hw4.ex1.steps.FirstExerciseAssertionStep;
-import hw4.ex2.steps.SecondExerciseActionStep;
-import hw4.ex2.steps.SecondExerciseAssertionStep;
+import hw4.baseclass.webdriver.DriverManager;
+import hw4.baseclass.utility.AllureListener;
+import hw4.baseclass.steps.assertion.CommonAssertSteps;
+import hw4.baseclass.steps.action.FirstExerciseActionStep;
+import hw4.baseclass.steps.assertion.FirstExerciseAssertionStep;
+import hw4.baseclass.steps.action.SecondExerciseActionStep;
+import hw4.baseclass.steps.assertion.SecondExerciseAssertionStep;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
@@ -22,10 +21,6 @@ public abstract class CoreTest {
     protected WebDriver driver;
     protected SoftAssert softAssertion;
     protected WebDriverWait wait;
-    protected BaseClass commonSteps;
-
-    protected HomePage homePage;
-    protected FramePage framePage;
 
     protected FirstExerciseActionStep firstExerciseActionStep;
     protected FirstExerciseAssertionStep firstExerciseAssertionStep;
@@ -33,7 +28,6 @@ public abstract class CoreTest {
     protected SecondExerciseAssertionStep secondExerciseAssertionStep;
     protected SecondExerciseActionStep secondExerciseActionStep;
 
-    protected CommonActionStep commonActionStep;
     protected CommonAssertSteps commonAssertSteps;
 
     @BeforeMethod(alwaysRun = true)
@@ -41,19 +35,15 @@ public abstract class CoreTest {
         driver =  DriverManager.setupDriver();
         wait = new WebDriverWait(driver, 5);
         softAssertion = new SoftAssert();
-        commonSteps = new BaseClass(driver, wait);
 
-        homePage = new HomePage(driver);
-        framePage = new FramePage(driver);
-
-        commonActionStep = new CommonActionStep(driver, wait);
         commonAssertSteps = new CommonAssertSteps(driver, softAssertion);
 
-        firstExerciseActionStep = new FirstExerciseActionStep(driver);
-        firstExerciseAssertionStep = new FirstExerciseAssertionStep(driver, softAssertion);
+        firstExerciseActionStep = new FirstExerciseActionStep(driver, wait);
+        firstExerciseAssertionStep = new FirstExerciseAssertionStep(driver, softAssertion, wait);
 
         secondExerciseActionStep = new SecondExerciseActionStep(driver);
-        secondExerciseAssertionStep = new SecondExerciseAssertionStep(driver, softAssertion);
+        secondExerciseAssertionStep = new SecondExerciseAssertionStep(softAssertion);
+
         testContext.setAttribute("driver", driver);
     }
 
