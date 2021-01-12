@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="hw4">
+
+    <test name="exercise_1">
+        <classes>
+            <class name="hw4.ex1.runtest.FirstExerciseRunTest"/>
+        </classes>
+    </test>
+
+    <test name="exercise_2">
+        <classes>
+            <class name="hw4.ex2.runtest.SecondExerciseRunTest"/>
+        </classes>
+    </test>
+</suite>
