@@ -36,7 +36,7 @@ public abstract class CoreTest {
         wait = new WebDriverWait(driver, 5);
         softAssertion = new SoftAssert();
 
-        commonAssertSteps = new CommonAssertSteps(driver, softAssertion);
+        commonAssertSteps = new CommonAssertSteps(softAssertion);
 
         firstExerciseActionStep = new FirstExerciseActionStep(driver, wait);
         firstExerciseAssertionStep = new FirstExerciseAssertionStep(driver, softAssertion, wait);
