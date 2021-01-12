@@ -3,28 +3,34 @@ package hw4.baseclass.steps.assertion;
 import hw4.baseclass.utility.GetProperties;
 import hw4.baseclass.pages.FramePage;
 import hw4.baseclass.pages.HomePage;
+
 import org.openqa.selenium.WebDriver;
-import io.qameta.allure.Step;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.asserts.SoftAssert;
+
 import java.util.Arrays;
 import java.util.List;
+
+import io.qameta.allure.Step;
+
 import static hw4.baseclass.utility.GetProperties.NameOfProperty.EXERCISE_DATA;
 
 public class FirstExerciseAssertionStep {
 
+    private HomePage homePage;
     private FramePage framePage;
+
     private WebDriver driver;
     private SoftAssert softAssertion;
-    private HomePage homePage;
+
     private GetProperties getExerciseDataProperties = new GetProperties(EXERCISE_DATA);
 
     public FirstExerciseAssertionStep(WebDriver driver, SoftAssert softAssertion,
-                                      WebDriverWait wait) {
+                                      HomePage homePage, FramePage framePage) {
         this.softAssertion = softAssertion;
         this.driver = driver;
-        framePage = new FramePage(driver);
-        homePage = new HomePage(driver, wait);
+        this.homePage = homePage;
+        this.framePage = framePage;
     }
 
     @Step("STEP #5: Assert that there are 4 items on the header")

@@ -3,20 +3,18 @@ package hw4.ex1.runtest;
 import hw4.baseclass.CoreTest;
 import hw4.baseclass.entity.User;
 import hw4.baseclass.dataprovider.AssertDataProvider;
-import hw4.baseclass.pages.FramePage;
-import hw4.baseclass.pages.HomePage;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
+
+import io.qameta.allure.*;
+
 import java.util.stream.Collectors;
 
 @Feature("Selenium")
 @Story("Homework #4")
 public class FirstExerciseRunTest extends CoreTest {
 
-    protected HomePage homePage;
-    protected FramePage framePage;
     protected AssertDataProvider assertDataProvider;
 
     @Test(
@@ -26,8 +24,6 @@ public class FirstExerciseRunTest extends CoreTest {
     )
     public void exercise_1_Test(String expectedMicroscope, String expectedHeadphones,
                                 String expectedMonitor, String expectedRocket) {
-        homePage = new HomePage(driver, wait);
-        framePage = new FramePage(driver);
         assertDataProvider = new AssertDataProvider();
 
         //STEP #1: Open test site by URL

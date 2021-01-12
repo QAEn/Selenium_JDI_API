@@ -6,10 +6,10 @@ import io.qameta.allure.Step;
 
 public class SecondExerciseActionStep {
 
-    DifferentElementsPage differentElementsPage;
+    private DifferentElementsPage differentElementsPage;
 
-    public SecondExerciseActionStep(WebDriver driver) {
-        differentElementsPage = new DifferentElementsPage(driver);
+    public SecondExerciseActionStep(WebDriver driver, DifferentElementsPage differentElementsPage) {
+        this.differentElementsPage = differentElementsPage;
     }
 
     //STEP #5: Open through the header menu Service -> Different Elements Page

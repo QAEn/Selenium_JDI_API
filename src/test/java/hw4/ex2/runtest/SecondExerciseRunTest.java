@@ -1,28 +1,21 @@
 package hw4.ex2.runtest;
 
 import hw4.baseclass.CoreTest;
-import hw4.baseclass.dataprovider.AssertDataProvider;
 import hw4.baseclass.entity.User;
-import hw4.baseclass.pages.DifferentElementsPage;
-import hw4.baseclass.pages.HomePage;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
+import hw4.baseclass.dataprovider.AssertDataProvider;
+import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 @Feature("Selenium")
 @Story("Homework #4")
 public class SecondExerciseRunTest extends CoreTest {
 
-    protected HomePage homePage;
-    protected DifferentElementsPage differentElementsPage;
     protected AssertDataProvider assertDataProvider;
 
     @Test(
             description = "Second exercise test, Jira binding cab be here"
     )
     public void exercise_2_Test() {
-        homePage = new HomePage(driver, wait);
-        differentElementsPage = new DifferentElementsPage(driver);
         assertDataProvider = new AssertDataProvider();
 
         //STEP #1: Open test site by URL
