@@ -24,5 +24,4 @@ public class WebDriverSingleton {
         driver.quit();
         driver = null;
     }
-
 }

@@ -1,9 +1,8 @@
 package hw5.steps;
 
 import hw5.services.entity.User;
-import hw5.services.page.component.CheckBox;
-import hw5.services.page.component.Dropdown;
-import hw5.services.page.component.RadioButton;
+import hw5.services.page.component.*;
+
 import io.cucumber.java.en.Then;
 
 public class ThenGherkin extends AbstractGherkin {

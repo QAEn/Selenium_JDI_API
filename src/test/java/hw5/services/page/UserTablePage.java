@@ -1,9 +1,8 @@
 package hw5.services.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,10 +82,10 @@ public class UserTablePage extends AbstractPage {
     //Exercise 3:
 
     public void selectVipCheckbox(String vip, String name) {
-        for (WebElement e: selectCheckboxForSergeyIvan) {
-            if (e.getText().contains(name)) {
-                System.out.println(e.getText());
-                e.findElement(By.tagName("input")).click();
+        for (WebElement element: selectCheckboxForSergeyIvan) {
+            if (element.getText().contains(name)) {
+                System.out.println(element.getText());
+                element.findElement(By.tagName("input")).click();
                 //e.findElement(By.linkText(vip)).click();
             }
         }

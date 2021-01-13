@@ -2,8 +2,7 @@ package hw5.services.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.opera.OperaDriver;
 
@@ -49,5 +48,4 @@ public class WebDriverFactory {
         WebDriverManager.operadriver().setup();
         return new OperaDriver();
     }
-
 }

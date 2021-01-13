@@ -1,11 +1,11 @@
 package hw5.services.page;
 
-import hw5.services.page.component.CheckBox;
-import hw5.services.page.component.Dropdown;
-import hw5.services.page.component.RadioButton;
+import hw5.services.page.component.*;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;

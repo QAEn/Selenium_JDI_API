@@ -1,11 +1,9 @@
 package hw5.services.page.component;
 
 import hw5.services.page.AbstractPage;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Header extends AbstractPage {
 
