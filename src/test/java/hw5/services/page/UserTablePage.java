@@ -118,7 +118,7 @@ public class UserTablePage extends AbstractPage {
     public void selectVipCheckbox(String vip, String name) {
         for (WebElement element: selectCheckboxForSergeyIvan) {
             if (element.getText().contains(name)) {
-                System.out.println(element.getText());
+                //System.out.println(element.getText());
                 element.findElement(By.tagName("input")).click();
                 //e.findElement(By.linkText(vip)).click();
             }
