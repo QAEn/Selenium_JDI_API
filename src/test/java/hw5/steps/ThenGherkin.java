@@ -3,7 +3,10 @@ package hw5.steps;
 import hw5.services.entity.User;
 import hw5.services.page.component.*;
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Then;
+
+import java.util.List;
 
 public class ThenGherkin extends AbstractGherkin {
 
@@ -65,47 +68,104 @@ public class ThenGherkin extends AbstractGherkin {
 
     //Scenario: Exercise 2
 
-    @Then("6 {string} Type Dropdowns should be displayed on Users Table on User Table Page")
-    public void assertDropdowns(String dropdowns) {
-        softAssert.assertTrue(
-                userTablePage.getNumber(dropdowns),
-                "\nIncorrect \'" + dropdowns + "\' number on User Table Page\n"
+    @Then("{string} Number Type Dropdowns should be displayed on Users Table on User Table Page")
+    public void assertDropdowns(String amountDropdowns) {
+        softAssert.assertEquals(
+                userTablePage.getSixDropdowns(), amountDropdowns,
+                "\nIncorrect \'" + amountDropdowns + "\' amount of DROPDOWNS on User Table Page\n"
         );
     }
 
-    @Then("6 {string}names should be displayed on Users Table on User Table Page")
-    public void assertUsernames(String usernames) {
-        softAssert.assertTrue(
-                userTablePage.getUser(usernames),
-                "\nIncorrect \'" + usernames + "\' username on User Table Page\n"
+    @Then("{string} Usernames should be displayed on Users Table on User Table Page")
+    public void assertUsernames(String amountUsernames) {
+        softAssert.assertEquals(
+                userTablePage.getSixUsernames(), amountUsernames,
+                "\nIncorrect \'" + amountUsernames + "\' amount of USERNAMES on User Table Page\n"
         );
     }
 
-    @Then("6 {string} texts under images should be displayed on Users Table on User Table Page")
-    public void assertDescription(String description) {
-        softAssert.assertTrue(
-                userTablePage.getDescription(description),
-                "\nIncorrect \'" + description + "\' description on User Table Page\n"
+    @Then("{string} Description texts under images should be displayed on Users Table on "
+            + "User Table Page")
+    public void assertDescription(String amountDescription) {
+        softAssert.assertEquals(
+                userTablePage.getSixDescription(), amountDescription,
+                "\nIncorrect \'" + amountDescription
+                        + "\' amount of DESCRIPTION on User Table Page\n"
         );
     }
 
     @Then("{string} checkboxes should be displayed on Users Table on User Table Page")
     public void assertCheckboxes(String amountCheckBoxes) {
         softAssert.assertEquals(
-                userTablePage.assertSixCheckboxes(), amountCheckBoxes,
-                "\nIncorrect \'" + amountCheckBoxes + "\' amount of checkboxes on User Table Page\n"
+                userTablePage.getSixCheckboxes(), amountCheckBoxes,
+                "\nIncorrect \'" + amountCheckBoxes + "\' amount of CHECKBOXES on User Table Page\n"
         );
-
-
-        softAssert.assertAll("\nFailed assertAll\n");
     }
 
-    @Then("{string} should contain values in column Type for user Roman")
-    public void assertDroplist(String droplist) {
-        softAssert.assertEquals(
-                userTablePage.assertDroplist(), droplist,
-                "\nIncorrect \'" + droplist + "\' droplist on User Table Page\n"
-        );
+    @Then("User table should contain following values:")
+    public void assertTable(DataTable dataTable) {
+        List<List<String>> table = dataTable.asLists(String.class);
+
+        for (int j = 1; j < table.size(); j++) {
+            String expectedNumber = table.get(j).get(0);
+            String expectedName = table.get(j).get(1);
+            String expectedDes = table.get(j).get(2);
+            //System.out.println("\nnumber from GherkinTable (expected) >>> "+ expectedNumber);
+            //System.out.println("name from GherkinTable (expected) >>> "+ expectedName);
+            //System.out.println("des from GherkinTable (expected) >>> "+ expectedDes);
+
+            for (int i = 0; i < table.size(); i++) {
+                //System.err.println("number from Page (actual) >>> "
+                // + userTablePage.getNumber2().get(j-1));
+                //System.err.println("name from Page (actual) >>> "
+                // + userTablePage.getUser2().get(j-1));
+                //System.err.println("des from Page (actual) >>> "
+                // + userTablePage.getDescription().get(j-1));
+
+                softAssert.assertEquals(userTablePage.getNumber().get(j - 1), expectedNumber,
+                        "\n>>>Failed assert number<<<\n"
+                                + "Actual: " + userTablePage.getNumber().get(j - 1)
+                                + "\nExpected: " + expectedNumber + "\n"
+                );
+
+                softAssert.assertEquals(userTablePage.getUser().get(j - 1), expectedName,
+                        "\n>>>Failed assert name<<<\n"
+                                + "Actual: " + userTablePage.getUser().get(j - 1)
+                                + "\nExpected: " + expectedName + "\n"
+                );
+
+                softAssert.assertEquals(userTablePage.getDescription().get(j - 1), expectedDes,
+                        "\n>>>Failed assert description<<<\n"
+                                + "Actual: " + userTablePage.getDescription().get(j - 1)
+                                + "\nExpected: " + expectedDes + "\n"
+                );
+            }
+        }
+    }
+
+    @Then("droplist should contain values in column Type for user Roman")
+    public void droplist(DataTable dataTable) {
+        List<List<String>> table = dataTable.asLists(String.class);
+
+        for (int j = 1; j < table.size(); j++) {
+            String expectedRole = table.get(j).get(0);
+            //System.out.println("\nrole from GherkinTable (expected) >>> "+ expectedRole);
+
+            for (int i = 0; i < userTablePage.getRomanRole().size(); i++) {
+
+                //System.err.println("role from Page (actual) >>> "
+                // + userTablePage.getRomanRole().get(j-1));
+
+                softAssert.assertEquals(userTablePage.getRomanRole().get(j - 1), expectedRole,
+                        "\n>>>Failed assert role<<<\n"
+                                + "Actual: " + userTablePage.getRomanRole().get(j - 1)
+                                + "\nExpected: " + expectedRole + "\n"
+                );
+
+            }
+        }
+
+        softAssert.assertAll("\nFailed assertAll\n");
     }
 
     //Scenario: Exercise 3
