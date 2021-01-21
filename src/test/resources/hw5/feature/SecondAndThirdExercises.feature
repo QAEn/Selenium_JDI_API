@@ -22,7 +22,7 @@ Feature: Selenium
       | 5      | Yoshi Tannamuri  | Cyclope some description         |
       | 6      | Giovanni Rovelli | Hulksome description             |
     And droplist should contain values in column Type for user Roman
-#      | Dropdown Values | чит
+#      | Dropdown Values |
       | Admin           |
       | User            |
       | Manager         |
