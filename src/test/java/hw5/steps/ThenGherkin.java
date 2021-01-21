@@ -107,9 +107,6 @@ public class ThenGherkin extends AbstractGherkin {
         List<List<String>> actualUserTable = userTablePage.getTable();
         List<List<String>> expectedTable = dataTable.asLists(String.class);
 
-        System.out.println(actualUserTable);
-        System.out.println(expectedTable);
-
         softAssert.assertEquals(
                 actualUserTable, expectedTable,
                 "\nIncorrect USER_TABLE\n Actual:\n" + actualUserTable
@@ -121,9 +118,6 @@ public class ThenGherkin extends AbstractGherkin {
     public void droplist(DataTable dataTable) {
         List<List<String>> actualRoleTable = userTablePage.getRoleTable();
         List<List<String>> expectedRoleTable = dataTable.asLists(String.class);
-
-        System.out.println(actualRoleTable);
-        System.out.println(expectedRoleTable);
 
         softAssert.assertEquals(
                 actualRoleTable, expectedRoleTable,

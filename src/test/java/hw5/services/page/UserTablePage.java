@@ -85,16 +85,13 @@ public class UserTablePage extends AbstractPage {
     public List<String> getDescription() {
         List<String> listDescription = new ArrayList<>();
 
-        String[] wolverineArrStr = heroesList.get(0).getText().split(" ");
-        String wolverine = wolverineArrStr[0];
-
-        String[] spiderManArrStr = heroesList.get(1).getText().split(" ");
-        String spider = spiderManArrStr[0] + " " + spiderManArrStr[1];
-
-        String[] punisherArrStr = heroesList.get(2).getText().split(" ");
-        String punisher = punisherArrStr[0];
+        String wolverine = heroesList.get(0).getText();
+        String spider = heroesList.get(1).getText();
+        String punisher = heroesList.get(2).getText();
 
         String[] captainArrStr = heroesList.get(3).getText().split("\n");
+//        String cap = heroesList.get(3).getText().replaceAll("[\\s\\R]*", " ");
+//        System.out.println(cap);
         String capitan = captainArrStr[0] + " " + captainArrStr[1];
 
         String[] cyclopeArrStr = heroesList.get(4).getText().split("\n");
