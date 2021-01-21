@@ -73,6 +73,63 @@ public class UserTablePage extends AbstractPage {
         return listName;
     }
 
+    public List<List<String>> getTable() {
+
+        List<List<String>> tableList = new ArrayList<>();
+
+        List<String> listRomana = new ArrayList<>();
+        List<String> listSergeyIvan = new ArrayList<>();
+        List<String> listVladzimir = new ArrayList<>();
+        List<String> listHelenBennett = new ArrayList<>();
+        List<String> listYoshiTannamuri = new ArrayList<>();
+        List<String> listGiovanniRovelli = new ArrayList<>();
+
+        for (int j = 0; j < 1; j++) {
+            listRomana.add(getNumber().get(j));
+            listRomana.add(getUser().get(j));
+            listRomana.add(getDescription().get(j));
+        }
+
+        for (int j = 1; j < 2; j++) {
+            listSergeyIvan.add(getNumber().get(j));
+            listSergeyIvan.add(getUser().get(j));
+            listSergeyIvan.add(getDescription().get(j));
+        }
+
+        for (int j = 2; j < 3; j++) {
+            listVladzimir.add(getNumber().get(j));
+            listVladzimir.add(getUser().get(j));
+            listVladzimir.add(getDescription().get(j));
+        }
+
+        for (int j = 3; j < 4; j++) {
+            listHelenBennett.add(getNumber().get(j));
+            listHelenBennett.add(getUser().get(j));
+            listHelenBennett.add(getDescription().get(j));
+        }
+
+        for (int j = 4; j < 5; j++) {
+            listYoshiTannamuri.add(getNumber().get(j));
+            listYoshiTannamuri.add(getUser().get(j));
+            listYoshiTannamuri.add(getDescription().get(j));
+        }
+
+        for (int j = 5; j < 6; j++) {
+            listGiovanniRovelli.add(getNumber().get(j));
+            listGiovanniRovelli.add(getUser().get(j));
+            listGiovanniRovelli.add(getDescription().get(j));
+        }
+
+        tableList.add(listRomana);
+        tableList.add(listSergeyIvan);
+        tableList.add(listVladzimir);
+        tableList.add(listHelenBennett);
+        tableList.add(listYoshiTannamuri);
+        tableList.add(listGiovanniRovelli);
+
+        return tableList;
+    }
+
     public List<String> getDescription() {
         List<String> listDescription = new ArrayList<>();
 

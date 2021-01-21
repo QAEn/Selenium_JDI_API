@@ -104,43 +104,52 @@ public class ThenGherkin extends AbstractGherkin {
 
     @Then("User table should contain following values:")
     public void assertTable(DataTable dataTable) {
-        List<List<String>> table = dataTable.asLists(String.class);
+        List<List<String>> expectedTable = dataTable.asLists(String.class);
 
-        for (int j = 1; j < table.size(); j++) {
-            String expectedNumber = table.get(j).get(0);
-            String expectedName = table.get(j).get(1);
-            String expectedDes = table.get(j).get(2);
-            //System.out.println("\nnumber from GherkinTable (expected) >>> "+ expectedNumber);
-            //System.out.println("name from GherkinTable (expected) >>> "+ expectedName);
-            //System.out.println("des from GherkinTable (expected) >>> "+ expectedDes);
+        List<List<String>> actualTable = userTablePage.getTable();
 
-            for (int i = 0; i < table.size(); i++) {
-                //System.err.println("number from Page (actual) >>> "
-                // + userTablePage.getNumber2().get(j-1));
-                //System.err.println("name from Page (actual) >>> "
-                // + userTablePage.getUser2().get(j-1));
-                //System.err.println("des from Page (actual) >>> "
-                // + userTablePage.getDescription().get(j-1));
+        System.out.println(expectedTable);
+        System.out.println("\n");
+        System.out.println(actualTable);
 
-                softAssert.assertEquals(userTablePage.getNumber().get(j - 1), expectedNumber,
-                        "\n>>>Failed assert number<<<\n"
-                                + "Actual: " + userTablePage.getNumber().get(j - 1)
-                                + "\nExpected: " + expectedNumber + "\n"
-                );
-
-                softAssert.assertEquals(userTablePage.getUser().get(j - 1), expectedName,
-                        "\n>>>Failed assert name<<<\n"
-                                + "Actual: " + userTablePage.getUser().get(j - 1)
-                                + "\nExpected: " + expectedName + "\n"
-                );
-
-                softAssert.assertEquals(userTablePage.getDescription().get(j - 1), expectedDes,
-                        "\n>>>Failed assert description<<<\n"
-                                + "Actual: " + userTablePage.getDescription().get(j - 1)
-                                + "\nExpected: " + expectedDes + "\n"
-                );
-            }
-        }
+        softAssert.assertEquals(actualTable, expectedTable);
+//
+//        for (int j = 1; j < expectedTable.size(); j++) {
+//            String expectedNumber = expectedTable.get(j).get(0);
+//            String expectedName = expectedTable.get(j).get(1);
+//            String expectedDes = expectedTable.get(j).get(2);
+//            //System.out.println("\nnumber from GherkinTable (expected) >>> "+ expectedNumber);
+//            //System.out.println("name from GherkinTable (expected) >>> "+ expectedName);
+//            //System.out.println("des from GherkinTable (expected) >>> "+ expectedDes);
+//
+//            for (int i = 0; i < expectedTable.size(); i++) {
+//                //System.err.println("number from Page (actual) >>> "
+//                // + userTablePage.getNumber2().get(j-1));
+//                //System.err.println("name from Page (actual) >>> "
+//                // + userTablePage.getUser2().get(j-1));
+//                //System.err.println("des from Page (actual) >>> "
+//                // + userTablePage.getDescription().get(j-1));
+//
+//                softAssert.assertEquals(userTablePage.getNumber().get(j - 1), expectedNumber,
+//                        "\n>>>Failed assert number<<<\n"
+//                                + "Actual: " + userTablePage.getNumber().get(j - 1)
+//                                + "\nExpected: " + expectedNumber + "\n"
+//                );
+//
+//                softAssert.assertEquals(userTablePage.getUser().get(j - 1), expectedName,
+//                        "\n>>>Failed assert name<<<\n"
+//                                + "Actual: " + userTablePage.getUser().get(j - 1)
+//                                + "\nExpected: " + expectedName + "\n"
+//                );
+//
+//                softAssert.assertEquals(userTablePage.getDescription().get(j - 1), expectedDes,
+//                        "\n>>>Failed assert description<<<\n"
+//                                + "Actual: " + userTablePage.getDescription().get(j - 1)
+//                                + "\nExpected: " + expectedDes + "\n"
+//                );
+//            }
+//        }
+//
     }
 
     @Then("droplist should contain values in column Type for user Roman")
