@@ -104,75 +104,32 @@ public class ThenGherkin extends AbstractGherkin {
 
     @Then("User table should contain following values:")
     public void assertTable(DataTable dataTable) {
+        List<List<String>> actualUserTable = userTablePage.getTable();
         List<List<String>> expectedTable = dataTable.asLists(String.class);
 
-        List<List<String>> actualTable = userTablePage.getTable();
-
+        System.out.println(actualUserTable);
         System.out.println(expectedTable);
-        System.out.println("\n");
-        System.out.println(actualTable);
 
-        softAssert.assertEquals(actualTable, expectedTable);
-//
-//        for (int j = 1; j < expectedTable.size(); j++) {
-//            String expectedNumber = expectedTable.get(j).get(0);
-//            String expectedName = expectedTable.get(j).get(1);
-//            String expectedDes = expectedTable.get(j).get(2);
-//            //System.out.println("\nnumber from GherkinTable (expected) >>> "+ expectedNumber);
-//            //System.out.println("name from GherkinTable (expected) >>> "+ expectedName);
-//            //System.out.println("des from GherkinTable (expected) >>> "+ expectedDes);
-//
-//            for (int i = 0; i < expectedTable.size(); i++) {
-//                //System.err.println("number from Page (actual) >>> "
-//                // + userTablePage.getNumber2().get(j-1));
-//                //System.err.println("name from Page (actual) >>> "
-//                // + userTablePage.getUser2().get(j-1));
-//                //System.err.println("des from Page (actual) >>> "
-//                // + userTablePage.getDescription().get(j-1));
-//
-//                softAssert.assertEquals(userTablePage.getNumber().get(j - 1), expectedNumber,
-//                        "\n>>>Failed assert number<<<\n"
-//                                + "Actual: " + userTablePage.getNumber().get(j - 1)
-//                                + "\nExpected: " + expectedNumber + "\n"
-//                );
-//
-//                softAssert.assertEquals(userTablePage.getUser().get(j - 1), expectedName,
-//                        "\n>>>Failed assert name<<<\n"
-//                                + "Actual: " + userTablePage.getUser().get(j - 1)
-//                                + "\nExpected: " + expectedName + "\n"
-//                );
-//
-//                softAssert.assertEquals(userTablePage.getDescription().get(j - 1), expectedDes,
-//                        "\n>>>Failed assert description<<<\n"
-//                                + "Actual: " + userTablePage.getDescription().get(j - 1)
-//                                + "\nExpected: " + expectedDes + "\n"
-//                );
-//            }
-//        }
-//
+        softAssert.assertEquals(
+                actualUserTable, expectedTable,
+                "\nIncorrect USER_TABLE\n Actual:\n" + actualUserTable
+                        + "\n Expected:\n" + expectedTable + "\n" + "\n"
+        );
     }
 
     @Then("droplist should contain values in column Type for user Roman")
     public void droplist(DataTable dataTable) {
-        List<List<String>> table = dataTable.asLists(String.class);
+        List<List<String>> actualRoleTable = userTablePage.getRoleTable();
+        List<List<String>> expectedRoleTable = dataTable.asLists(String.class);
 
-        for (int j = 1; j < table.size(); j++) {
-            String expectedRole = table.get(j).get(0);
-            //System.out.println("\nrole from GherkinTable (expected) >>> "+ expectedRole);
+        System.out.println(actualRoleTable);
+        System.out.println(expectedRoleTable);
 
-            for (int i = 0; i < userTablePage.getRomanRole().size(); i++) {
-
-                //System.err.println("role from Page (actual) >>> "
-                // + userTablePage.getRomanRole().get(j-1));
-
-                softAssert.assertEquals(userTablePage.getRomanRole().get(j - 1), expectedRole,
-                        "\n>>>Failed assert role<<<\n"
-                                + "Actual: " + userTablePage.getRomanRole().get(j - 1)
-                                + "\nExpected: " + expectedRole + "\n"
-                );
-
-            }
-        }
+        softAssert.assertEquals(
+                actualRoleTable, expectedRoleTable,
+                "\nIncorrect ROMAN_ROLE\n Actual:\n" + actualRoleTable
+                        + "\n Expected:\n" + expectedRoleTable + "\n" + "\n"
+        );
 
         softAssert.assertAll("\nFailed assertAll\n");
     }

@@ -19,6 +19,15 @@ public class UserTablePage extends AbstractPage {
     @FindBy(xpath = "//tbody//td[4]//span")
     private List<WebElement> sixDescriprions;
 
+    @FindBy(xpath = "//thead//th[1]")
+    protected WebElement numbersText;
+
+    @FindBy(xpath = "//thead//th[3]")
+    protected WebElement userText;
+
+    @FindBy(xpath = "//thead//th[4]")
+    protected WebElement descriptionText;
+
     @FindBy(xpath = "//tbody/tr/td[1]")
     protected List<WebElement> numbers;
 
@@ -77,6 +86,8 @@ public class UserTablePage extends AbstractPage {
 
         List<List<String>> tableList = new ArrayList<>();
 
+        List<String> listHead = new ArrayList<>();
+
         List<String> listRomana = new ArrayList<>();
         List<String> listSergeyIvan = new ArrayList<>();
         List<String> listVladzimir = new ArrayList<>();
@@ -85,41 +96,41 @@ public class UserTablePage extends AbstractPage {
         List<String> listGiovanniRovelli = new ArrayList<>();
 
         for (int j = 0; j < 1; j++) {
-            listRomana.add(getNumber().get(j));
-            listRomana.add(getUser().get(j));
-            listRomana.add(getDescription().get(j));
+            listHead.add(numbersText.getText());
+            listHead.add(userText.getText());
+            listHead.add(descriptionText.getText());
         }
 
-        for (int j = 1; j < 2; j++) {
-            listSergeyIvan.add(getNumber().get(j));
-            listSergeyIvan.add(getUser().get(j));
-            listSergeyIvan.add(getDescription().get(j));
+        for (int k = 0; k < 1; k++) {
+            for (int j = k; j < k+1; j++) {
+
+                listRomana.add(getNumber().get(k));
+                listRomana.add(getUser().get(k));
+                listRomana.add(getDescription().get(k));
+
+                listSergeyIvan.add(getNumber().get(k+1));
+                listSergeyIvan.add(getUser().get(k+1));
+                listSergeyIvan.add(getDescription().get(k+1));
+
+                listVladzimir.add(getNumber().get(k+2));
+                listVladzimir.add(getUser().get(k+2));
+                listVladzimir.add(getDescription().get(k+2));
+
+                listHelenBennett.add(getNumber().get(k+3));
+                listHelenBennett.add(getUser().get(k+3));
+                listHelenBennett.add(getDescription().get(k+3));
+
+                listYoshiTannamuri.add(getNumber().get(k+4));
+                listYoshiTannamuri.add(getUser().get(k+4));
+                listYoshiTannamuri.add(getDescription().get(k+4));
+
+                listGiovanniRovelli.add(getNumber().get(k+5));
+                listGiovanniRovelli.add(getUser().get(k+5));
+                listGiovanniRovelli.add(getDescription().get(k+5));
+            }
         }
 
-        for (int j = 2; j < 3; j++) {
-            listVladzimir.add(getNumber().get(j));
-            listVladzimir.add(getUser().get(j));
-            listVladzimir.add(getDescription().get(j));
-        }
-
-        for (int j = 3; j < 4; j++) {
-            listHelenBennett.add(getNumber().get(j));
-            listHelenBennett.add(getUser().get(j));
-            listHelenBennett.add(getDescription().get(j));
-        }
-
-        for (int j = 4; j < 5; j++) {
-            listYoshiTannamuri.add(getNumber().get(j));
-            listYoshiTannamuri.add(getUser().get(j));
-            listYoshiTannamuri.add(getDescription().get(j));
-        }
-
-        for (int j = 5; j < 6; j++) {
-            listGiovanniRovelli.add(getNumber().get(j));
-            listGiovanniRovelli.add(getUser().get(j));
-            listGiovanniRovelli.add(getDescription().get(j));
-        }
-
+        //tableList.add(listHead);
         tableList.add(listRomana);
         tableList.add(listSergeyIvan);
         tableList.add(listVladzimir);
@@ -128,6 +139,29 @@ public class UserTablePage extends AbstractPage {
         tableList.add(listGiovanniRovelli);
 
         return tableList;
+    }
+
+    public List<List<String>> getRoleTable() {
+
+        List<List<String>> listRole = new ArrayList<>();
+
+        List<String> admin = new ArrayList<>();
+        List<String> user = new ArrayList<>();
+        List<String> manager = new ArrayList<>();
+
+        for (int k = 0; k < 1; k++) {
+            for (int j = k; j < k+1; j++) {
+                admin.add(getRomanRole().get(k));
+                user.add(getRomanRole().get(k+1));
+                manager.add(getRomanRole().get(k+2));
+            }
+        }
+
+        listRole.add(admin);
+        listRole.add(user);
+        listRole.add(manager);
+
+        return listRole;
     }
 
     public List<String> getDescription() {
