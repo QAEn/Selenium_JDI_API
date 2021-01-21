@@ -82,6 +82,37 @@ public class UserTablePage extends AbstractPage {
         return listName;
     }
 
+    public List<String> getDescription() {
+        List<String> listDescription = new ArrayList<>();
+
+        String[] wolverineArrStr = heroesList.get(0).getText().split(" ");
+        String wolverine = wolverineArrStr[0];
+
+        String[] spiderManArrStr = heroesList.get(1).getText().split(" ");
+        String spider = spiderManArrStr[0] + " " + spiderManArrStr[1];
+
+        String[] punisherArrStr = heroesList.get(2).getText().split(" ");
+        String punisher = punisherArrStr[0];
+
+        String[] captainArrStr = heroesList.get(3).getText().split("\n");
+        String capitan = captainArrStr[0] + " " + captainArrStr[1];
+
+        String[] cyclopeArrStr = heroesList.get(4).getText().split("\n");
+        String cyclope = cyclopeArrStr[0] + " " + cyclopeArrStr[1];
+
+        String[] hulkArrStr = heroesList.get(5).getText().split("\n");
+        String hulk = hulkArrStr[0] + hulkArrStr[1];
+
+        listDescription.add(wolverine);
+        listDescription.add(spider);
+        listDescription.add(punisher);
+        listDescription.add(capitan);
+        listDescription.add(cyclope);
+        listDescription.add(hulk);
+
+        return listDescription;
+    }
+
     public List<List<String>> getTable() {
 
         List<List<String>> tableList = new ArrayList<>();
@@ -141,6 +172,15 @@ public class UserTablePage extends AbstractPage {
         return tableList;
     }
 
+    public List<String> getRomanRole() {
+        String[] resList = dropdowns.get(0).getText().split("\n");
+        List<String> listRole = new ArrayList<>();
+        for (int i = 0; i < resList.length; i++) {
+            listRole.add(resList[i].trim());
+        }
+        return listRole;
+    }
+
     public List<List<String>> getRoleTable() {
 
         List<List<String>> listRole = new ArrayList<>();
@@ -161,46 +201,6 @@ public class UserTablePage extends AbstractPage {
         listRole.add(user);
         listRole.add(manager);
 
-        return listRole;
-    }
-
-    public List<String> getDescription() {
-        List<String> listDescription = new ArrayList<>();
-
-        String[] wolverineArrStr = heroesList.get(0).getText().split(" ");
-        String wolverine = wolverineArrStr[0];
-
-        String[] spiderManArrStr = heroesList.get(1).getText().split(" ");
-        String spider = spiderManArrStr[0] + " " + spiderManArrStr[1];
-
-        String[] punisherArrStr = heroesList.get(2).getText().split(" ");
-        String punisher = punisherArrStr[0];
-
-        String[] captainArrStr = heroesList.get(3).getText().split("\n");
-        String capitan = captainArrStr[0] + " " + captainArrStr[1];
-
-        String[] cyclopeArrStr = heroesList.get(4).getText().split("\n");
-        String cyclope = cyclopeArrStr[0] + " " + cyclopeArrStr[1];
-
-        String[] hulkArrStr = heroesList.get(5).getText().split("\n");
-        String hulk = hulkArrStr[0] + hulkArrStr[1];
-
-        listDescription.add(wolverine);
-        listDescription.add(spider);
-        listDescription.add(punisher);
-        listDescription.add(capitan);
-        listDescription.add(cyclope);
-        listDescription.add(hulk);
-
-        return listDescription;
-    }
-
-    public List<String> getRomanRole() {
-        String[] resList = dropdowns.get(0).getText().split("\n");
-        List<String> listRole = new ArrayList<>();
-        for (int i = 0; i < resList.length; i++) {
-            listRole.add(resList[i].trim());
-        }
         return listRole;
     }
 
