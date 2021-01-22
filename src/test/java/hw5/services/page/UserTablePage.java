@@ -90,8 +90,8 @@ public class UserTablePage extends AbstractPage {
         String punisher = heroesList.get(2).getText();
 
         String[] captainArrStr = heroesList.get(3).getText().split("\n");
-//        String cap = heroesList.get(3).getText().replaceAll("[\\s\\R]*", " ");
-//        System.out.println(cap);
+        //String cap = heroesList.get(3).getText().replaceAll("[\\s\\R]*", " ");
+        //System.out.println(cap);
         String capitan = captainArrStr[0] + " " + captainArrStr[1];
 
         String[] cyclopeArrStr = heroesList.get(4).getText().split("\n");
@@ -130,31 +130,31 @@ public class UserTablePage extends AbstractPage {
         }
 
         for (int k = 0; k < 1; k++) {
-            for (int j = k; j < k+1; j++) {
+            for (int j = k; j < k + 1; j++) {
 
                 listRomana.add(getNumber().get(k));
                 listRomana.add(getUser().get(k));
                 listRomana.add(getDescription().get(k));
 
-                listSergeyIvan.add(getNumber().get(k+1));
-                listSergeyIvan.add(getUser().get(k+1));
-                listSergeyIvan.add(getDescription().get(k+1));
+                listSergeyIvan.add(getNumber().get(k + 1));
+                listSergeyIvan.add(getUser().get(k + 1));
+                listSergeyIvan.add(getDescription().get(k + 1));
 
-                listVladzimir.add(getNumber().get(k+2));
-                listVladzimir.add(getUser().get(k+2));
-                listVladzimir.add(getDescription().get(k+2));
+                listVladzimir.add(getNumber().get(k + 2));
+                listVladzimir.add(getUser().get(k + 2));
+                listVladzimir.add(getDescription().get(k + 2));
 
-                listHelenBennett.add(getNumber().get(k+3));
-                listHelenBennett.add(getUser().get(k+3));
-                listHelenBennett.add(getDescription().get(k+3));
+                listHelenBennett.add(getNumber().get(k + 3));
+                listHelenBennett.add(getUser().get(k + 3));
+                listHelenBennett.add(getDescription().get(k + 3));
 
-                listYoshiTannamuri.add(getNumber().get(k+4));
-                listYoshiTannamuri.add(getUser().get(k+4));
-                listYoshiTannamuri.add(getDescription().get(k+4));
+                listYoshiTannamuri.add(getNumber().get(k + 4));
+                listYoshiTannamuri.add(getUser().get(k + 4));
+                listYoshiTannamuri.add(getDescription().get(k + 4));
 
-                listGiovanniRovelli.add(getNumber().get(k+5));
-                listGiovanniRovelli.add(getUser().get(k+5));
-                listGiovanniRovelli.add(getDescription().get(k+5));
+                listGiovanniRovelli.add(getNumber().get(k + 5));
+                listGiovanniRovelli.add(getUser().get(k + 5));
+                listGiovanniRovelli.add(getDescription().get(k + 5));
             }
         }
 
@@ -187,10 +187,10 @@ public class UserTablePage extends AbstractPage {
         List<String> manager = new ArrayList<>();
 
         for (int k = 0; k < 1; k++) {
-            for (int j = k; j < k+1; j++) {
+            for (int j = k; j < k + 1; j++) {
                 admin.add(getRomanRole().get(k));
-                user.add(getRomanRole().get(k+1));
-                manager.add(getRomanRole().get(k+2));
+                user.add(getRomanRole().get(k + 1));
+                manager.add(getRomanRole().get(k + 2));
             }
         }
 
