@@ -110,7 +110,8 @@ public class UserTablePage extends AbstractPage {
         return listDescription;
     }
 
-    public List<List<String>> getTable() {
+    //feel the difference -->> 173 line
+    public List<List<String>> getTable2() {
 
         List<List<String>> tableList = new ArrayList<>();
 
@@ -169,6 +170,18 @@ public class UserTablePage extends AbstractPage {
         return tableList;
     }
 
+    public List<List<String>> getTable() {
+        List<List<String>> tableList = new ArrayList<>();
+        for (int k = 0; k < getNumber().size(); k++) {
+            List<String> row = Arrays.asList(
+                    getNumber().get(k),
+                    getUser().get(k),
+                    getDescription().get(k));
+            tableList.add(row);
+        }
+        return tableList;
+    }
+
     public List<String> getRomanRole() {
         String[] resList = dropdowns.get(0).getText().split("\n");
         List<String> listRole = new ArrayList<>();
@@ -181,23 +194,11 @@ public class UserTablePage extends AbstractPage {
     public List<List<String>> getRoleTable() {
 
         List<List<String>> listRole = new ArrayList<>();
-
-        List<String> admin = new ArrayList<>();
-        List<String> user = new ArrayList<>();
-        List<String> manager = new ArrayList<>();
-
-        for (int k = 0; k < 1; k++) {
-            for (int j = k; j < k + 1; j++) {
-                admin.add(getRomanRole().get(k));
-                user.add(getRomanRole().get(k + 1));
-                manager.add(getRomanRole().get(k + 2));
-            }
+        for (int i = 0; i < getRomanRole().size() - 1; i++) {
+            List<String> line = Arrays.asList(
+                    getRomanRole().get(i));
+            listRole.add(line);
         }
-
-        listRole.add(admin);
-        listRole.add(user);
-        listRole.add(manager);
-
         return listRole;
     }
 
