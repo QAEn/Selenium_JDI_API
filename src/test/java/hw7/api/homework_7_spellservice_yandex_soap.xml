@@ -162,56 +162,67 @@ Expected result:
 Comparison is responded to the expected result from the source file.
 
 Postcondition:
-Clean test case's property space.</con:description><con:settings/><con:testStep type="request" name="ERROR_UNKNOWN_WORD" id="f6fad308-a266-40a3-86b5-0f193306106d"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="ERROR_UNKNOWN_WORD" id="8d0308b0-2521-4a47-af4f-447c9eb45500"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">
+Clean test case's property space.</con:description><con:settings/><con:testStep type="groovy" name="Groovy Script" id="67efad00-511f-45e4-9b42-7154b80b5dc4"><con:settings/><con:config><script>import jxl.* // import Java Excel API library
+def TestCase = context.testCase
+
+def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+def projectDir = groovyUtils.projectPath
+
+File file = new File(projectDir)
+def firstLevelDir = file.getParent()
+def filePath = firstLevelDir + "\\SourceDataFile\\" + "CheckOptionERROR_UNKNOWN_WORD_TestCase.xls"
+
+def count
+Workbook WorkBook1 = Workbook.getWorkbook(new File(filePath))
+Sheet Sheet1 = WorkBook1.getSheet(0)
+PropertiesTestStep = TestCase.getTestStepByName("Properties")
+count = PropertiesTestStep.getPropertyValue("Counter").toInteger()
+
+//If Total records is unknown (at start), get the rowcount from Excel
+if (PropertiesTestStep.getPropertyValue("Total").toString() == "")
+    PropertiesTestStep.setPropertyValue("Total", Sheet1.getRows().toString())
+count++
+
+//Read the Excel test data
+Cell Field1 = Sheet1.getCell(0, count)
+Cell Field2 = Sheet1.getCell(1, count)
+log.info ("Count is " + count.toString() + " InputText : " + Field1.getContents() + " ExpectedResult : " + Field2.getContents())
+WorkBook1.close()
+
+//Copy the Excel test data to properties in Properties test step
+PropertiesTestStep.setPropertyValue("InputText", Field1.getContents())
+PropertiesTestStep.setPropertyValue("ExpectedResult", Field2.getContents())
+PropertiesTestStep.setPropertyValue("Counter", count.toString())
+if (count == PropertiesTestStep.getPropertyValue("Total").toInteger() - 1)
+    PropertiesTestStep.setPropertyValue("End", "True")</script></con:config></con:testStep><con:testStep type="properties" name="Properties" id="5ac093dc-666e-4c30-9527-2d48dde6acda"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Counter</con:name><con:value>0</con:value></con:property><con:property><con:name>InputText</con:name><con:value/></con:property><con:property><con:name>ExpectedResult</con:name><con:value/></con:property><con:property><con:name>Total</con:name><con:value/></con:property><con:property><con:name>End</con:name><con:value/></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="ERROR_UNKNOWN_WORD" id="f6fad308-a266-40a3-86b5-0f193306106d"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="ERROR_UNKNOWN_WORD" id="8d0308b0-2521-4a47-af4f-447c9eb45500"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">
    <soapenv:Header/>
    <soapenv:Body>
-      <spel:CheckTextRequest lang="${#Global#lang}" options="${#TestCase#option}" format="">
-         <spel:text>${#TestCase#inputText}</spel:text>
+      <spel:CheckTextRequest lang="${#Global#lang}" options="${#TestCase#options}" format="">
+         <spel:text>${Properties#InputText}</spel:text>
       </spel:CheckTextRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="e6e9a54b-a06f-44bf-b287-891210784cf9"/><con:assertion type="XPath Match" id="b53c3ee8-da9f-4a5c-ab48-2ed8f1ab973d" name="matchResult"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
-declare namespace ns1='http://speller.yandex.net/services/spellservice';
-
-//ns1:SpellResult</path><content><![CDATA[<SpellResult xmlns="http://speller.yandex.net/services/spellservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <error code="1" pos="0" row="0" col="0" len="9">
-    <word>${#TestCase#inputText}</word>
-    <s>${#TestCase#expectedResult}</s>
-  </error>
-</SpellResult>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:assertion type="Simple NotContains" id="8167f1c7-cb7b-44f2-93ac-71b41a0a7962" name="Not Contains"><con:configuration><token>Eng</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="62ec83e8-c834-4465-84f4-17abe9024702" name="assertionTag"><con:configuration><scriptText>def expected = context.expand('${#TestCase#expectedResult}')
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="e6e9a54b-a06f-44bf-b287-891210784cf9"/><con:assertion type="Simple NotContains" id="8167f1c7-cb7b-44f2-93ac-71b41a0a7962" name="Not Contains"><con:configuration><token>Eng</token><ignoreCase>false</ignoreCase><useRegEx>false</useRegEx></con:configuration></con:assertion><con:assertion type="GroovyScriptAssertion" id="62ec83e8-c834-4465-84f4-17abe9024702" name="assertionTag"><con:configuration><scriptText>def expected = context.expand('${Properties#ExpectedResult}')
 
 def xmlObjResp = new XmlSlurper().parseText(messageExchange.getResponseContent())
 
 def actual = xmlObjResp.Body.CheckTextResponse.SpellResult.error.s
 
+//log.info actual
+//log.info expected
+
 assert actual == expected
-</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:setupScript>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
-def projectPath = groovyUtils.projectPath 
-
-context.fileReader = new BufferedReader(new FileReader(projectPath + "\\CheckOptionERROR_UNKNOWN_WORD_TestCase.csv"))
-def curTC = testCase
-
-firstLine = context.fileReader.readLine()
-
-curTC.setPropertyValue("titleList", firstLine)
-
- //Split the first line into string array
-String[] titleFields = firstLine.split(",")
-
-firstLine = context.fileReader.readLine()
-String[] propData = firstLine.split(",")
-
-
-def titleCount = titleFields.size()
-for(i = 0; i &lt;= titleCount-1; i++)
-{
-	curTC.setPropertyValue(titleFields[i], propData[i])
-}
-</con:setupScript><con:tearDownScript>//Clear property space
-//testRunner.testCase.removeProperty("options")
-//testRunner.testCase.removeProperty("inputText")
-//testRunner.testCase.removeProperty("expectedResult")
-
-context.fileReader.close()</con:tearDownScript><con:properties><con:property><con:name>titleList</con:name><con:value>options,inputText,expectedResult</con:value></con:property><con:property><con:name>options</con:name><con:value>1</con:value></con:property><con:property><con:name>inputText</con:name><con:value>Helokitty</con:value></con:property><con:property><con:name>expectedResult</con:name><con:value>Hello kitty</con:value></con:property></con:properties></con:testCase><con:testCase id="82fd1df5-cb00-4e06-b920-da46d4885c36" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CheckOptionERROR_CAPITALIZATION_TestCase" searchProperties="true"><con:description>
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script loop" id="878956ea-faa7-4661-8ade-dfbd2bb81356"><con:settings/><con:config><script>def TestCase = context.testCase
+PropertiesTestStep = TestCase.getTestStepByName("Properties")
+Stop = PropertiesTestStep.getPropertyValue("End").toString()
+if (Stop=="True")
+    log.info("Exit Groovy Script - DataLoop")
+else
+    testRunner.gotoStepByName("Groovy Script")</script></con:config></con:testStep><con:setupScript/><con:tearDownScript>
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Counter", "0")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("InputText", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("ExpectedResult", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Total", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("End", "")</con:tearDownScript><con:properties><con:property><con:name>options</con:name><con:value>1</con:value></con:property></con:properties></con:testCase><con:testCase id="82fd1df5-cb00-4e06-b920-da46d4885c36" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="CheckOptionERROR_CAPITALIZATION_TestCase" searchProperties="true"><con:description>
 Precondition: 
 All property's elements contained in the source file, located with the project xml file.
 
@@ -227,55 +238,75 @@ Expected result:
 Comparison is responded to the expected result from the source file.
 
 Postcondition:
-Clean test suite's property space.</con:description><con:settings/><con:testStep type="groovy" name="GetSource" id="d480a6fb-fbf6-4caf-8741-ea5d2ecd6add"><con:settings/><con:config><script>import groovy.util.*
+Clean test suite's property space.</con:description><con:settings/><con:testStep type="groovy" name="Groovy Script" id="9ca56351-0d38-4be6-af70-0ba98e39eb20"><con:settings/><con:config><script>import jxl.* // import Java Excel API library
+def TestCase = context.testCase
 
-def res
 def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
 def projectDir = groovyUtils.projectPath
 
 File file = new File(projectDir)
 def firstLevelDir = file.getParent()
+def filePath = firstLevelDir + "\\SourceDataFile\\" + "CheckOptionERROR_CAPITALIZATION_TestCase.xls"
 
-//log.info firstLevelDir
+def count
+Workbook WorkBook1 = Workbook.getWorkbook(new File(filePath))
+Sheet Sheet1 = WorkBook1.getSheet(0)
+PropertiesTestStep = TestCase.getTestStepByName("Properties")
+count = PropertiesTestStep.getPropertyValue("Counter").toInteger()
 
-def filePath = firstLevelDir + "\\SourceDataFile\\" + "CheckOptionERROR_CAPITALIZATION_TestCase.csv"
+//If Total records is unknown (at start), get the rowcount from Excel
+if (PropertiesTestStep.getPropertyValue("Total").toString() == "")
+    PropertiesTestStep.setPropertyValue("Total", Sheet1.getRows().toString())
+count++
 
-//log.info filePath
+//Read the Excel test data
+Cell Field1 = Sheet1.getCell(0, count)
+Cell Field2 = Sheet1.getCell(1, count)
+log.info ("Count is " + count.toString() + " InputText : " + Field1.getContents() + " ExpectedResult : " + Field2.getContents())
+WorkBook1.close()
 
-context.fileReader = new BufferedReader(new FileReader(filePath))
-
-nextLine = context.fileReader.readLine()
-
-if(nextLine != null){
-    String[] propData = nextLine.split(", ")
-    curTC = testRunner.testCase.testSuite
-    
-    curTC.setPropertyValue("options",propData[0])
-    curTC.setPropertyValue("inputText",propData[1])
-    curTC.setPropertyValue("expectedResult",propData[2])
-   
-}</script></con:config></con:testStep><con:testStep type="request" name="ERROR_CAPITALIZATION" id="db0c70e5-d58e-479c-9d55-8b4d35110269"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="ERROR_CAPITALIZATION" id="c3b14664-d3ae-48dd-ae7f-133513be7104"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">
+//Copy the Excel test data to properties in Properties test step
+PropertiesTestStep.setPropertyValue("InputText", Field1.getContents())
+PropertiesTestStep.setPropertyValue("ExpectedResult", Field2.getContents())
+PropertiesTestStep.setPropertyValue("Counter", count.toString())
+if (count == PropertiesTestStep.getPropertyValue("Total").toInteger() - 1)
+    PropertiesTestStep.setPropertyValue("End", "True")</script></con:config></con:testStep><con:testStep type="properties" name="Properties" id="f6a59caa-d3b4-4021-829d-6edf772c8137"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Counter</con:name><con:value>0</con:value></con:property><con:property><con:name>InputText</con:name><con:value/></con:property><con:property><con:name>ExpectedResult</con:name><con:value/></con:property><con:property><con:name>Total</con:name><con:value/></con:property><con:property><con:name>End</con:name><con:value/></con:property></con:properties></con:config></con:testStep><con:testStep type="request" name="ERROR_CAPITALIZATION" id="db0c70e5-d58e-479c-9d55-8b4d35110269"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>SpellServiceSoap</con:interface><con:operation>checkText</con:operation><con:request name="ERROR_CAPITALIZATION" id="c3b14664-d3ae-48dd-ae7f-133513be7104"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://speller.yandex.net/services/spellservice</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:spel="http://speller.yandex.net/services/spellservice">
    <soapenv:Header/>
    <soapenv:Body>
       <spel:CheckTextRequest lang="${#Global#lang}" options="${#TestSuite#options}" format="">
-         <spel:text>${#TestSuite#inputText}</spel:text>
+         <spel:text>${Properties#InputText}</spel:text>
       </spel:CheckTextRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6985abec-51f3-4782-a6a6-99584457227b"/><con:assertion type="XPath Match" id="97ebfaa7-cb50-49e3-aab6-775a680bc588" name="XPath Match"><con:configuration><path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
-declare namespace ns1='http://speller.yandex.net/services/spellservice';
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="6985abec-51f3-4782-a6a6-99584457227b"/><con:assertion type="GroovyScriptAssertion" id="2c3b0768-b6a6-424f-a391-c58bd64bd0e6" name="Script Assertion"><con:configuration><scriptText>def expected = context.expand('${Properties#ExpectedResult}')
 
-//ns1:SpellResult</path><content><![CDATA[<SpellResult xmlns="http://speller.yandex.net/services/spellservice" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <error code="3" pos="2" row="0" col="2" len="4">
-    <word>FleW</word>
-    <s>${#TestSuite#expectedResult}</s>
-  </error>
-</SpellResult>]]></content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences><ignoreComments>false</ignoreComments></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:tearDownScript>//Clear property space
-testRunner.testCase.testSuite.removeProperty("options")
-testRunner.testCase.testSuite.removeProperty("inputText")
-testRunner.testCase.testSuite.removeProperty("expectedResult")
+def xmlObjResp = new XmlSlurper().parseText(messageExchange.getResponseContent())
+
+def actual = xmlObjResp.Body.CheckTextResponse.SpellResult.error.s
+
+//log.info actual
+//log.info expected
+
+assert actual == expected
+</scriptText></con:configuration></con:assertion><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="Groovy Script loop" id="8e62610f-93fc-4917-9bbe-c9f3ac6a0a42"><con:settings/><con:config><script>def TestCase = context.testCase
+PropertiesTestStep = TestCase.getTestStepByName("Properties")
+Stop = PropertiesTestStep.getPropertyValue("End").toString()
+if (Stop=="True")
+    log.info("Exit Groovy Script - DataLoop")
+else
+    testRunner.gotoStepByName("Groovy Script")</script></con:config></con:testStep><con:tearDownScript>//Clear property space
+//testRunner.testCase.testSuite.removeProperty("options")
+//testRunner.testCase.testSuite.removeProperty("inputText")
+//testRunner.testCase.testSuite.removeProperty("expectedResult")
 
 
-context.fileReader.close()</con:tearDownScript><con:properties><con:property><con:name>options</con:name><con:value>3</con:value></con:property><con:property><con:name>inputText</con:name><con:value>I FleW to CYPRUS</con:value></con:property><con:property><con:name>expectedResult</con:name><con:value>Flew</con:value></con:property></con:properties></con:testCase><con:properties/></con:testSuite><con:testSuite id="adfb8946-13e2-4cf9-aeb2-48fe224a0685" name="readFromSaopfile_TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2e1ed8f2-9ad3-41ad-84d5-8a1c7fdddf70" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ServiceReturnCorrectWord_TestCase" searchProperties="true"><con:description>
+//context.fileReader.close()
+
+
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Counter", "0")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("InputText", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("ExpectedResult", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("Total", "")
+testRunner.testCase.getTestStepByName("Properties").setPropertyValue("End", "")</con:tearDownScript><con:properties/></con:testCase><con:properties><con:property><con:name>options</con:name><con:value>3</con:value></con:property></con:properties></con:testSuite><con:testSuite id="adfb8946-13e2-4cf9-aeb2-48fe224a0685" name="readFromSaopfile_TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="2e1ed8f2-9ad3-41ad-84d5-8a1c7fdddf70" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ServiceReturnCorrectWord_TestCase" searchProperties="true"><con:description>
 Precondition: 
 All property's elements contained in the source file, located with the project xml file.
 
