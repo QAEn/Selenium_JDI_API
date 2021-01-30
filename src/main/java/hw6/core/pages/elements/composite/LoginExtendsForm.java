@@ -4,9 +4,9 @@ import com.epam.jdi.light.elements.composite.Form;
 import com.epam.jdi.light.elements.pageobjects.annotations.FindBy;
 import com.epam.jdi.light.ui.html.elements.common.*;
 
-import hw6.core.entities.User;
+import hw6.core.pages.elements.composite.pageentity.UserEntity;
 
-public class LoginComposite extends Form<User> {
+public class LoginExtendsForm extends Form<UserEntity> {
 
     @FindBy(id = "name")
     public TextField name;

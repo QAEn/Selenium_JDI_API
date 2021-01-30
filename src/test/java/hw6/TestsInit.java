@@ -10,6 +10,7 @@ public interface TestsInit {
     @BeforeSuite
     default void setupTest() {
         PageFactory.initSite(Site.class);
+        new Site();
     }
 
     @AfterSuite
