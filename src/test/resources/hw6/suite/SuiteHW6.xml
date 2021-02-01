@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="hw6">
+
+    <test name="JDI">
+        <classes>
+            <class name="hw6.runtest.RunTest"/>
+        </classes>
+    </test>
+
+</suite>
