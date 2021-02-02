@@ -58,7 +58,5 @@ public class CheckTextApiTest extends CoreTest {
         assertThat(answers.get(0).toString(), containsString(
                 SetTextData.TestText.SECOND_RUS_WORD.getCorrectData())
         );
-
     }
-
 }

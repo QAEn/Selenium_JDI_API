@@ -5,11 +5,11 @@ import static hw8.utility.GetProperties.NameOfProperty.*;
 public class ReaderOfTestData {
 
     private GetProperties getTestDataProperties = new GetProperties(TEST_DATA);
-    private GetProperties getURIProperties = new GetProperties(URI);
+    private GetProperties getUriProperties = new GetProperties(URI);
 
-    protected String getYandexSpellerCheckTextApi = getURIProperties
+    protected String getYandexSpellerCheckTextApi = getUriProperties
             .getUri("yandexSpellerCheckTextAPI");
-    protected String getYandexSpellerCheckTextsApi = getURIProperties
+    protected String getYandexSpellerCheckTextsApi = getUriProperties
             .getUri("yandexSpellerCheckTextsAPI");
 
     protected String firstRusCorrectWord = getTestDataProperties
