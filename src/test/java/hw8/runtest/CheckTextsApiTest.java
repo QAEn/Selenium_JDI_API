@@ -16,7 +16,7 @@ import static hw8.core.constants.SetTextData.TestText.*;
 
 public class CheckTextsApiTest extends CoreTest {
 
-    @Test(description = "")
+    @Test(description = "check ignore wrong capitalization")
     public void ignoreWrongCapitalization() {
         List<YandexSpellerAnswer> answers =
                 CheckText.getYandexSpellerAnswers(
@@ -27,7 +27,7 @@ public class CheckTextsApiTest extends CoreTest {
         assertThat("expected number of answers is wrong.", answers.size(), equalTo(0));
     }
 
-    @Test(description = "")
+    @Test(description = "check ignore digits")
     public void ignoreDigits() {
         List<YandexSpellerAnswer> answers =
                 CheckText.getYandexSpellerAnswers(

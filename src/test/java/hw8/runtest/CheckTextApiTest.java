@@ -19,7 +19,7 @@ import static hw8.core.constants.TypeOfError.*;
 
 public class CheckTextApiTest extends CoreTest {
 
-    @Test(description = "")
+    @Test(description = "check ignore wrong capitalization")
     public void ignoreWrongCapitalization() {
         List<YandexSpellerAnswer> answers =
                 CheckText.getYandexSpellerAnswers(
@@ -30,7 +30,7 @@ public class CheckTextApiTest extends CoreTest {
         assertThat("expected number of answers is wrong.", answers.size(), equalTo(0));
     }
 
-    @Test(description = "")
+    @Test(description = "check ignore digits")
     public void ignoreDigits() {
         List<YandexSpellerAnswer> answers =
                 CheckText.getYandexSpellerAnswers(
@@ -41,7 +41,7 @@ public class CheckTextApiTest extends CoreTest {
         assertThat("expected number of answers is wrong.", answers.size(), equalTo(0));
     }
 
-    @Test(description = "")
+    @Test(description = "check text with wrong language")
     public void checkTextWithWrongLanguage() {
         List<YandexSpellerAnswer> answers =
                 CheckText.getYandexSpellerAnswers(
