@@ -5,7 +5,6 @@ import java.util.HashMap;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-import hw8.core.constants.Constants;
 import hw8.utility.ReaderOfTestData;
 
 import static hw8.core.constants.Constants.*;
@@ -33,7 +32,7 @@ public class YandexSpellerCore extends ReaderOfTestData {
             return this;
         }
 
-        public ApiBuilder language(Constants.Language language) {
+        public ApiBuilder language(Language language) {
             yandexSpellerCore.params.put(PARAM_LANG, language.languageCode);
             return this;
         }
