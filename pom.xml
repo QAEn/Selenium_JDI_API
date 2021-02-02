@@ -25,6 +25,7 @@
         <cucumber.version>6.9.1</cucumber.version>
         <hamcrest.version>2.2</hamcrest.version>
         <calculator.module4.version>1.0</calculator.module4.version>
+        <rest-assured>3.2.0</rest-assured>
 
         <!-- plugin versions -->
         <maven-checkstyle-plugin.version>3.1.1</maven-checkstyle-plugin.version>
@@ -88,11 +89,18 @@
 
         <profile>
             <id>hw6</id>
+            <properties>
+                <suite.file>${project.build.testOutputDirectory}/hw6/suite/SuiteHW6.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>hw8</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.build.testOutputDirectory}/hw6/suite/SuiteHW6.xml</suite.file>
+                <suite.file>${project.build.testOutputDirectory}/hw8/suite/YandexSpellerApi.xml</suite.file>
             </properties>
         </profile>
     </profiles>
@@ -197,6 +205,12 @@
             <artifactId>allure-cucumber6-jvm</artifactId>
             <version>${allure.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured}</version>
         </dependency>
 
     </dependencies>
