@@ -7,8 +7,6 @@ public class Constants {
     public static final String PARAM_LANG = "lang";
 
     public enum Language {
-
-        RU("ru"),
         EN("en");
 
         public String languageCode;

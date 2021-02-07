@@ -5,15 +5,19 @@ import java.util.HashMap;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
-import hw8.utility.ReaderOfTestData;
+import hw8.utility.GetProperties;
 
 import static hw8.core.constants.Constants.*;
+import static hw8.utility.GetProperties.NameOfProperty.ADDRESS;
 
-public class YandexSpellerCore extends ReaderOfTestData {
+public class YandexSpellerCore {
 
-    private HashMap<String, String> params = new HashMap<String, String>();
+    private HashMap<String, String> params = new HashMap<>();
 
-    public class ApiBuilder { //параметры при вызове апи
+    protected GetProperties getProperties = new GetProperties(ADDRESS);
+    protected String url = getProperties.getUri("url");
+
+    public class ApiBuilder {
         YandexSpellerCore yandexSpellerCore;
         String nameOfApiMethod;
 

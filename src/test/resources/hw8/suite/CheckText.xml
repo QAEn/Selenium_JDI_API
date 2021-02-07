@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="hw8">
+
+    <test name="CheckText">
+        <classes>
+            <class name="hw8.runtest.CheckTextApiTest"/>
+        </classes>
+    </test>
+
+</suite>

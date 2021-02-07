@@ -5,7 +5,7 @@ import static hw8.utility.GetProperties.NameOfProperty.*;
 public class ReaderOfTestData {
 
     private GetProperties getTestDataProperties = new GetProperties(TEST_DATA);
-    private GetProperties getUriProperties = new GetProperties(URI);
+    private GetProperties getUriProperties = new GetProperties(ADDRESS);
 
     protected String getYandexSpellerCheckTextApi = getUriProperties
             .getUri("yandexSpellerCheckTextAPI");

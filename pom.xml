@@ -100,7 +100,21 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.build.testOutputDirectory}/hw8/suite/YandexSpellerApi.xml</suite.file>
+                <suite.file>${project.build.testOutputDirectory}/hw8/suite/YandexSpeller.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>CheckText</id>
+            <properties>
+                <suite.file>${project.build.testOutputDirectory}/hw8/suite/CheckText.xml</suite.file>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>CheckTexts</id>
+            <properties>
+                <suite.file>${project.build.testOutputDirectory}/hw8/suite/CheckTexts.xml</suite.file>
             </properties>
         </profile>
     </profiles>

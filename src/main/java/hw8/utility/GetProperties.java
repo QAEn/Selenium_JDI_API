@@ -5,11 +5,11 @@ import java.util.ResourceBundle;
 public class GetProperties {
 
     private ResourceBundle testData;
-    private ResourceBundle uri;
+    private ResourceBundle address;
 
     public enum NameOfProperty {
         TEST_DATA,
-        URI
+        ADDRESS
     }
 
     public GetProperties(NameOfProperty numberOfExercise) {
@@ -17,8 +17,8 @@ public class GetProperties {
             case TEST_DATA:
                 testData = ResourceBundle.getBundle("hw8/properties/testdata");
                 break;
-            case URI:
-                uri = ResourceBundle.getBundle("hw8/properties/uri");
+            case ADDRESS:
+                address = ResourceBundle.getBundle("hw8/properties/address");
                 break;
             default:
                 System.err.println("The resource isn't selected");
@@ -31,6 +31,6 @@ public class GetProperties {
     }
 
     public String getUri(String resourceName) {
-        return uri.getString(resourceName);
+        return address.getString(resourceName);
     }
 }
