@@ -2,7 +2,7 @@ package hw8.core.constants;
 
 public enum TypeOfError {
     ERROR_CAPITALIZATION(3),
-    ERROR_DIGITALS(512);
+    ERROR_DIGITS(512);
 
     private int number;
 

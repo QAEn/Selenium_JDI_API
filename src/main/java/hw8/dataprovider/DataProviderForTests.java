@@ -1,45 +1,10 @@
 package hw8.dataprovider;
 
-import hw8.utility.GetProperties;
-
 import org.testng.annotations.DataProvider;
 
-import static java.lang.Integer.parseInt;
+import hw8.utility.ReaderOfTestData;
 
-import static hw8.utility.GetProperties.NameOfProperty.TEST_DATA;
-
-public class DataProviderForTests {
-
-    private GetProperties getTestData = new GetProperties(TEST_DATA);
-
-    private String inputTextForeIgnoreDigits = getTestData
-            .getTestData("inputTextForeIgnoreDigits");
-    private String expectedTextForeIgnoreDigits = getTestData
-            .getTestData("expectedTextForeIgnoreDigits");
-    private int expectedTextForeIgnoreCode = parseInt(getTestData
-            .getTestData("expectedTextForeIgnoreCode"));
-    private int expectedTextForeIgnorePos = parseInt(getTestData
-            .getTestData("expectedTextForeIgnorePos"));
-    private int expectedTextForeIgnoreRow = parseInt(getTestData
-            .getTestData("expectedTextForeIgnoreRow"));
-    private int expectedTextForeIgnoreCol = parseInt(getTestData
-            .getTestData("expectedTextForeIgnoreCol"));
-    private int expectedTextForeIgnoreLen = parseInt(getTestData
-            .getTestData("expectedTextForeIgnoreLen"));
-
-    private String inputTextForeIgnoreCapitalization = getTestData
-            .getTestData("inputTextForeIgnoreCapitalization");
-    private int expectedLenForeIgnoreCapitalization = parseInt(getTestData
-            .getTestData("expectedLenForeIgnoreCapitalization"));
-    private int expectedCapitalizationHasSize = parseInt(getTestData
-            .getTestData("expectedCapitalizationHasSize"));
-
-    private String correctWord = getTestData
-            .getTestData("correctWord");
-    private String incorrectWord = getTestData
-            .getTestData("incorrectWord");
-    private int expectedCodeForWrongWord = parseInt(getTestData
-            .getTestData("expectedCodeForWrongWord"));
+public class DataProviderForTests extends ReaderOfTestData {
 
     @DataProvider(name = "TestDataForIgnoreDigits")
     public Object[][] assertTestDataForIgnoreDigits() {
@@ -66,6 +31,22 @@ public class DataProviderForTests {
     public Object[][] assertTextDataSet() {
         return new Object[][]{
                 {correctWord, incorrectWord, expectedCodeForWrongWord}
+        };
+    }
+
+    @DataProvider(name = "TestDataForCapitalizationOfMethodCheckTexts")
+    public Object[][] testDataForCapitalizationOfMethodCheckTexts() {
+        return new Object[][]{
+                {       inputTextForeIgnoreCapitalization,
+                        expectedWordForeIgnoreCapitalization}
+        };
+    }
+
+    @DataProvider(name = "TestDataForDigitsOfMethodCheckTexts")
+    public Object[][] testDataForDigitsOfMethodCheckTexts() {
+        return new Object[][]{
+                {       inputTextForeIgnoreDigits,
+                        expectedWordForeIgnoreDigits}
         };
     }
 }

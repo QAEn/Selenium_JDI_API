@@ -37,7 +37,7 @@ public class CheckTextApiTest extends CoreTest {
                                 .with()
                                 .text(inputTextForeIgnoreDigits)
                                 .language(EN)
-                                .options(ERROR_DIGITALS.getNumber())
+                                .options(ERROR_DIGITS.getNumber())
                                 .callApi()
                                 .then()
                                 .specification(successResponse())
@@ -52,7 +52,6 @@ public class CheckTextApiTest extends CoreTest {
                 .checkThatBodyHasErrorCol(expectedTextForeIgnoreCol)
                 .checkThatBodyHasErrorLen(expectedTextForeIgnoreLen)
                 .checkThatWordWithErrorExistsAtAnswer(expectedTextForeIgnoreDigits);
-
     }
 
     @Test(
@@ -80,7 +79,6 @@ public class CheckTextApiTest extends CoreTest {
         assertThat(answer, hasSize(expectedCapitalizationHasSize));
         checkerOfAnswers = new CheckerOfAnswers(answer)
                 .checkThatBodyHasErrorLen(expectedLenForeIgnoreCapitalization);
-
     }
 
     @Test(

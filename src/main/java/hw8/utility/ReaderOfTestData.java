@@ -1,34 +1,44 @@
 package hw8.utility;
 
+import static java.lang.Integer.parseInt;
+
 import static hw8.utility.GetProperties.NameOfProperty.*;
 
 public class ReaderOfTestData {
 
-    private GetProperties getTestDataProperties = new GetProperties(TEST_DATA);
-    private GetProperties getUriProperties = new GetProperties(ADDRESS);
+    protected GetProperties getTestData = new GetProperties(TEST_DATA);
 
-    protected String getYandexSpellerCheckTextApi = getUriProperties
-            .getUri("yandexSpellerCheckTextAPI");
-    protected String getYandexSpellerCheckTextsApi = getUriProperties
-            .getUri("yandexSpellerCheckTextsAPI");
+    protected String inputTextForeIgnoreDigits = getTestData
+            .getTestData("inputTextForeIgnoreDigits");
+    protected String expectedTextForeIgnoreDigits = getTestData
+            .getTestData("expectedTextForeIgnoreDigits");
+    protected int expectedTextForeIgnoreCode = parseInt(getTestData
+            .getTestData("expectedTextForeIgnoreCode"));
+    protected int expectedTextForeIgnorePos = parseInt(getTestData
+            .getTestData("expectedTextForeIgnorePos"));
+    protected int expectedTextForeIgnoreRow = parseInt(getTestData
+            .getTestData("expectedTextForeIgnoreRow"));
+    protected int expectedTextForeIgnoreCol = parseInt(getTestData
+            .getTestData("expectedTextForeIgnoreCol"));
+    protected int expectedTextForeIgnoreLen = parseInt(getTestData
+            .getTestData("expectedTextForeIgnoreLen"));
 
-    protected String firstRusCorrectWord = getTestDataProperties
-            .getTestData("firstRusCorrectWord");
-    protected String firstRusWrongWord = getTestDataProperties
-            .getTestData("firstRusWrongWord");
+    protected String inputTextForeIgnoreCapitalization = getTestData
+            .getTestData("inputTextForeIgnoreCapitalization");
+    protected int expectedLenForeIgnoreCapitalization = parseInt(getTestData
+            .getTestData("expectedLenForeIgnoreCapitalization"));
+    protected int expectedCapitalizationHasSize = parseInt(getTestData
+            .getTestData("expectedCapitalizationHasSize"));
 
-    protected String secondRusCorrectWord = getTestDataProperties
-                    .getTestData("secondRusCorrectWord");
-    protected String secondRusWrongWord = getTestDataProperties
-                    .getTestData("secondRusWrongWord");
+    protected String correctWord = getTestData
+            .getTestData("correctWord");
+    protected String incorrectWord = getTestData
+            .getTestData("incorrectWord");
+    protected int expectedCodeForWrongWord = parseInt(getTestData
+            .getTestData("expectedCodeForWrongWord"));
 
-    protected String correctCapitalizationRusWord = getTestDataProperties
-                    .getTestData("correctCapitalizationRusWord");
-    protected String wrongCapitalizationRusWord = getTestDataProperties
-                    .getTestData("wrongCapitalizationRusWord");
-
-    protected String engWordWithoutDigits = getTestDataProperties
-            .getTestData("engWordWithoutDigits");
-    protected String engWordWithDigits = getTestDataProperties
-            .getTestData("engWordWithDigits");
+    protected String expectedWordForeIgnoreCapitalization = getTestData
+            .getTestData("expectedWordForeIgnoreCapitalization");
+    protected String expectedWordForeIgnoreDigits = getTestData
+            .getTestData("expectedWordForeIgnoreDigits");
 }

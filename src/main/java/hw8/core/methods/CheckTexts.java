@@ -15,6 +15,8 @@ import com.google.gson.reflect.TypeToken;
 import hw8.core.YandexSpellerCore;
 import hw8.beans.YandexSpellerAnswer;
 
+import static org.hamcrest.Matchers.containsString;
+
 public class CheckTexts extends YandexSpellerCore {
 
     private String uri = getProperties
@@ -28,16 +30,17 @@ public class CheckTexts extends YandexSpellerCore {
         return new ApiBuilder(checkTexts, url + uri);
     }
 
-    public static List<List<YandexSpellerAnswer>> getYandexSpellerAnswers(Response response) {
-        return new Gson().fromJson(
-                response.asString().trim(), new TypeToken<List<YandexSpellerAnswer>>() {}.getType()
-        );
+    public static List<YandexSpellerAnswer> getYandexSpellerAnswers(Response response) {
+        return new Gson().fromJson(response.asString().trim(),
+                                   new TypeToken<List<YandexSpellerAnswer>>() {}.getType());
     }
 
-    public static ResponseSpecification successResponse() {
+    public static ResponseSpecification successResponse(String expectedWord) {
         return new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .expectStatusCode(HttpStatus.SC_OK)
-                .build();
+                .build()
+                .expect()
+                .body(containsString(expectedWord));
     }
 }
