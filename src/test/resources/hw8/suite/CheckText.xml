@@ -3,7 +3,7 @@
 
     <test name="CheckText">
         <classes>
-            <class name="hw8.runtest.CheckTextApiTest"/>
+            <class name="hw8.runtest.CheckTextTest"/>
         </classes>
     </test>
 

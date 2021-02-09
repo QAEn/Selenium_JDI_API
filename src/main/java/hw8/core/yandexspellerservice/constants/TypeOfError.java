@@ -1,4 +1,4 @@
-package hw8.core.constants;
+package hw8.core.yandexspellerservice.constants;
 
 public enum TypeOfError {
     ERROR_CAPITALIZATION(3),
