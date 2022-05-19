@@ -1,2 +1,2 @@
 # Selenium_JDI_API
-mvn clean test
+mvn clean test -P hw5
